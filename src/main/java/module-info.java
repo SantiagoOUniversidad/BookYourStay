@@ -1,0 +1,8 @@
+module co.edu.uniquindio.bookyourstay {
+    requires javafx.controls;
+    requires javafx.fxml;
+
+
+    opens co.edu.uniquindio.bookyourstay to javafx.fxml;
+    exports co.edu.uniquindio.bookyourstay;
+}
