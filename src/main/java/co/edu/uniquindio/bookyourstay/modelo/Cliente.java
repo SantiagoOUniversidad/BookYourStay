@@ -1,10 +1,12 @@
 package co.edu.uniquindio.bookyourstay.modelo;
 
 import lombok.*;
+import lombok.experimental.*;
+
 @Getter
 @Setter
 @ToString
-@Builder
+@SuperBuilder
 
 public class Cliente extends Persona {
 

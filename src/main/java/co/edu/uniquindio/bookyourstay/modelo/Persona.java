@@ -1,11 +1,13 @@
 package co.edu.uniquindio.bookyourstay.modelo;
 
 import lombok.*;
+import lombok.experimental.*;
+
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 
 public class Persona {
 
