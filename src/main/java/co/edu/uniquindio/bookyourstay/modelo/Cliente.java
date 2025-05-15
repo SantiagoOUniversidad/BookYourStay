@@ -7,6 +7,7 @@ import lombok.experimental.*;
 @Setter
 @ToString
 @SuperBuilder
+@EqualsAndHashCode
 
 public class Cliente extends Persona {
 
