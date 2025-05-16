@@ -1,18 +1,19 @@
 package co.edu.uniquindio.bookyourstaytest;
 
 import co.edu.uniquindio.bookyourstay.modelo.*;
-import co.edu.uniquindio.bookyourstay.servicios.AdministradorServicios;
-import co.edu.uniquindio.bookyourstay.servicios.ClienteServicios;
+import co.edu.uniquindio.bookyourstay.servicios.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ServiciosTest {
 
     AdministradorServicios administradorServicios = new AdministradorServicios();
     ClienteServicios clienteServicios = new ClienteServicios();
+    CambiarContrasenaServicios cambiarContrasenaServicios = new CambiarContrasenaServicios();
     private final BookYourStay bookYourStay = BookYourStay.getInstancia();
 
     @Test
@@ -105,6 +106,22 @@ public class ServiciosTest {
     public void eliminarClienteTest() throws Exception{
         clienteServicios.crearCliente("1234567890", "Nombre", "123", "correo@mail.com", "clave");
         assertTrue(clienteServicios.eliminarCliente("1234567890"));
+    }
+
+    @Test
+    public void envioEmailTest() throws Exception{
+        EmailServicios emailServicios = new EmailServicios();
+        emailServicios.enviarCorreo("olartebuitrago@icloud.com", "Código de recuperación", "Tu código es: 123456");
+    }
+
+    @Test
+    public void cambioContrasenaTest() throws Exception{
+        clienteServicios.crearCliente("1234567890", "Nombre", "123", "nvanegas0@gmail.com", "clave");
+        Cliente clienteTest = clienteServicios.buscarCliente("1234567890");
+        cambiarContrasenaServicios.solicitarClave(clienteTest.getCedula());
+        String codigoGenerado = cambiarContrasenaServicios.clavesGeneradas.get(clienteTest.getCedula());
+        cambiarContrasenaServicios.verificarCodigo(clienteTest.getCedula(), codigoGenerado, "clave2");
+        assertEquals(clienteTest.getPassword(), "clave2");
     }
 
 }
