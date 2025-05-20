@@ -1,7 +1,7 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
-import co.edu.uniquindio.bookyourstay.modelo.BookYourStay;
-import co.edu.uniquindio.bookyourstay.modelo.Cliente;
+import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 
 public class ClienteServicios {
 
@@ -17,7 +17,7 @@ public class ClienteServicios {
         }
         try {
             buscarCliente(cedula);
-            throw new Exception("El administrador ya existe");
+            throw new Exception("El cliente ya existe");
         } catch (Exception adminNoEncontrado) {
         }
         Cliente nuevoAdministrador = Cliente.builder().cedula(cedula).nombre(nombre).telefono(telefono).email(email).password(password).build();

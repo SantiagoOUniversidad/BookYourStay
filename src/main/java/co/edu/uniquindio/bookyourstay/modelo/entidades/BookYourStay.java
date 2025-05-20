@@ -1,6 +1,8 @@
-package co.edu.uniquindio.bookyourstay.modelo;
+package co.edu.uniquindio.bookyourstay.modelo.entidades;
 import java.util.ArrayList;
 import java.util.List;
+
+import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import lombok.*;
 
 @Getter

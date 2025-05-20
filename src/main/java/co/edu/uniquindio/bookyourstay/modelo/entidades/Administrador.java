@@ -1,7 +1,8 @@
-package co.edu.uniquindio.bookyourstay.modelo;
+package co.edu.uniquindio.bookyourstay.modelo.entidades;
 
 import java.util.List;
 
+import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import lombok.*;
 import lombok.experimental.*;
 
@@ -25,7 +26,7 @@ public class Administrador extends Persona{
 
     public static Administrador getInstancia() {
         if (instancia == null) {
-            throw new IllegalStateException("El administrador aún no ha sido creado.");
+            throw new IllegalStateException("El administrador aún no ha sido creado");
         }
         return instancia;
     }

@@ -1,4 +1,4 @@
-package co.edu.uniquindio.bookyourstay.modelo;
+package co.edu.uniquindio.bookyourstay.modelo.entidades;
 
 import lombok.*;
 import lombok.experimental.*;
@@ -11,7 +11,7 @@ import lombok.experimental.*;
 
 public class Cliente extends Persona {
 
-    //sin atributos
+    //Sin atributos
 
     //Constructor Super
     public Cliente(String cedula, String nombre, String telefono, String email, String password) {

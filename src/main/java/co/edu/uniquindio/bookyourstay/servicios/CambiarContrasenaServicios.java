@@ -1,6 +1,7 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
-import co.edu.uniquindio.bookyourstay.modelo.*;
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
+import co.edu.uniquindio.bookyourstay.utils.EnvioEmail;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +12,7 @@ public class CambiarContrasenaServicios {
     public Map<String, String> clavesGeneradas = new HashMap<>();;
 
     ClienteServicios clienteServicios = new ClienteServicios();
-    EmailServicios emailServicios = new EmailServicios();
+    EnvioEmail envioEmail = new EnvioEmail();
 
     public boolean solicitarClave(String cedula) throws Exception {
         try {
@@ -19,7 +20,7 @@ public class CambiarContrasenaServicios {
             String emailCliente = clienteRecuperar.getEmail();
             String codigoGenerado = generarCodigo();
             clavesGeneradas.put(cedula, codigoGenerado);
-            emailServicios.enviarCorreo(emailCliente, "Código de recuperación | Book Your Stay", "Tu código es: " + codigoGenerado);
+            envioEmail.enviarCorreo(emailCliente, "Código de inicio de sesion | Book Your Stay", "Tu código es: " + codigoGenerado);
             return true;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

@@ -1,5 +1,6 @@
-package co.edu.uniquindio.bookyourstay.modelo;
+package co.edu.uniquindio.bookyourstay.modelo.entidades;
 
+import co.edu.uniquindio.bookyourstay.modelo.enums.TipoHabitacion;
 import javafx.scene.image.ImageView;
 import lombok.*;
 

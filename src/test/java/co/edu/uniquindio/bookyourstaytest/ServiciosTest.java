@@ -1,12 +1,14 @@
 package co.edu.uniquindio.bookyourstaytest;
 
-import co.edu.uniquindio.bookyourstay.modelo.*;
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Administrador;
+import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 import co.edu.uniquindio.bookyourstay.servicios.*;
+import co.edu.uniquindio.bookyourstay.utils.EnvioEmail;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ServiciosTest {
@@ -110,8 +112,8 @@ public class ServiciosTest {
 
     @Test
     public void envioEmailTest() throws Exception{
-        EmailServicios emailServicios = new EmailServicios();
-        emailServicios.enviarCorreo("olartebuitrago@icloud.com", "Código de recuperación", "Tu código es: 123456");
+        EnvioEmail envioEmail = new EnvioEmail();
+        envioEmail.enviarCorreo("olartebuitrago@icloud.com", "Código de recuperación", "Tu código es: 123456");
     }
 
     @Test

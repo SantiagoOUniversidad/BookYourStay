@@ -1,10 +1,10 @@
-package co.edu.uniquindio.bookyourstay.servicios;
+package co.edu.uniquindio.bookyourstay.utils;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import java.util.Properties;
 
-public class EmailServicios {
+public class EnvioEmail {
 
     private final String remitente = "santiago.olarteb@uqvirtual.edu.co";
     private final String clave = "tsnldhngzlqidqlg";

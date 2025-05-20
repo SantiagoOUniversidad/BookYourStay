@@ -1,4 +1,4 @@
-package co.edu.uniquindio.bookyourstay.modelo;
+package co.edu.uniquindio.bookyourstay.modelo.enums;
 
 public enum TipoServicio {
     PISCINA,

@@ -1,4 +1,4 @@
-package co.edu.uniquindio.bookyourstay.modelo;
+package co.edu.uniquindio.bookyourstay.modelo.entidades;
 
 import lombok.*;
 import lombok.experimental.*;

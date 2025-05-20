@@ -1,5 +1,6 @@
-package co.edu.uniquindio.bookyourstay.modelo;
+package co.edu.uniquindio.bookyourstay.modelo.entidades;
 
+import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import lombok.*;
 
 import java.util.Date;
