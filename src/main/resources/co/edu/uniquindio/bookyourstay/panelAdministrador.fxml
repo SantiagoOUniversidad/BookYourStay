@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox spacing="20.0" style="-fx-padding: 30px" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bookyourstay.controladores.PanelAdministradorControlador">
+   <children>
+      <VBox alignment="BASELINE_CENTER" minWidth="200.0" prefWidth="218.0" spacing="20.0">
+         <children>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label text="Bienvenido Administrador">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Button minWidth="200.0" onAction="#gestionarAlojamientos" text="Gestionar Alojamientos" />
+            <Button minWidth="200.0" onAction="#gestionarOfertas" text="Gestionar Ofertas" />
+            <Button minWidth="200.0" onAction="#obtenerEstadisticas" text="Obtener Estadisticas" />
+            <Button minWidth="200.0" mnemonicParsing="false" onAction="#cambiarContrasena" text="Cambiar Contraseña" />
+         </children>
+      </VBox>
+      <StackPane fx:id="panelPrincipal" HBox.hgrow="ALWAYS" />
+   </children>
+</HBox>
