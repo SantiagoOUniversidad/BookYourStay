@@ -17,4 +17,5 @@ public class Reserva {
     private Alojamiento alojamiento;
     private LocalDate fechaInicio;
     private LocalDate fechaFinal;
+    private float precioTotal;
 }

@@ -3,11 +3,15 @@ package co.edu.uniquindio.bookyourstay.servicios;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Administrador;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Habitacion;
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Reserva;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoAlojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoServicio;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.factory.FactoryAlojamiento;
 import javafx.scene.image.ImageView;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class AdministradorServicios {
@@ -73,5 +77,44 @@ public class AdministradorServicios {
     public void eliminarAlojamiento(Alojamiento alojamiento) throws Exception {
         if(alojamiento == null) throw new Exception("Seleccione un alojamiento");
         bookYourStay.alojamientos.remove(alojamiento);
+    }
+
+    // Calcular ocupacion porcentual
+    public float calcularOcupacion(Alojamiento alojamiento) {
+        List<Reserva> reservasAlojamiento = bookYourStay.getReservas().stream()
+                .filter(r -> r.getAlojamiento().equals(alojamiento))
+                .toList();
+
+        if (reservasAlojamiento.isEmpty()) {
+            return 0;
+        }
+
+        // Encontrar la fecha más temprana y más tardía
+        LocalDate fechaInicio = reservasAlojamiento.stream()
+                .map(Reserva::getFechaInicio)
+                .min(LocalDate::compareTo)
+                .orElseThrow();
+
+        LocalDate fechaFinal = reservasAlojamiento.stream()
+                .map(Reserva::getFechaFinal)
+                .max(LocalDate::compareTo)
+                .orElseThrow();
+
+        float diasTotales = ChronoUnit.DAYS.between(fechaInicio, fechaFinal);
+
+        float diasReservados = reservasAlojamiento.stream()
+                .mapToLong(r -> ChronoUnit.DAYS.between(r.getFechaInicio(), r.getFechaFinal()))
+                .sum();
+
+        return (diasTotales == 0) ? 0 : (diasReservados / diasTotales) * 100;
+    }
+
+    // Calcular ganancias totales
+    public float calcularGananciasTotales(Alojamiento alojamiento) {
+        List<Reserva> reservas = bookYourStay.getReservas();
+        return (float) reservas.stream()
+                .filter(r -> r.getAlojamiento().equals(alojamiento))
+                .mapToDouble(Reserva::getPrecioTotal)
+                .sum();
     }
 }

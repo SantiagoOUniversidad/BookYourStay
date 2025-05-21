@@ -15,7 +15,6 @@ import lombok.experimental.*;
 public class Administrador extends Persona{
 
     //Atributos
-    private List<Alojamiento> alojamientosAdministrador;
     private static Administrador instancia;
 
 
