@@ -64,4 +64,16 @@ public class ClienteServicios {
         return true;
     }
 
+    public Cliente validarCliente(String id, String password) throws Exception {
+        if(id == null || id.isEmpty() || password == null || password.isEmpty()) {
+            throw camposVacios;
+        }
+        for (Cliente cliente : bookYourStay.clientes) {
+            if (cliente.getCedula().equals(id) && cliente.getPassword().equals(password)) {
+                return cliente;
+            }
+        }
+        throw new Exception("El cliente no existe");
+    }
+
 }
