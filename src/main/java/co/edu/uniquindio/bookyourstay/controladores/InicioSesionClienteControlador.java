@@ -39,6 +39,7 @@ public class InicioSesionClienteControlador {
         abrirRegistro();
     }
 
+    // Funcion para validar y manejar inicio de sesion para Cliente
     private void iniciarSesion() {
         try{
             Cliente cliente = bookYourStayServicio.validarInicioCliente(txtUsuario.getText(), txtPassword.getText());
@@ -52,11 +53,13 @@ public class InicioSesionClienteControlador {
         }
     }
 
+    // Funcion cambiar pantalla de registro
     private void abrirRegistro() throws IOException {
         ControladorPrincipal.openView("registroCliente.fxml", "Registro", new Stage());
         ControladorPrincipal.cerrarVentana((Stage) txtUsuario.getScene().getWindow());
     }
 
+    // Funcion cambiar pantalla administrador
     private void iniciarAdministrador() throws IOException {
         ControladorPrincipal.openView("InicioSesionAdministrador.fxml", "Inicio Sesion", new Stage());
         ControladorPrincipal.cerrarVentana((Stage) txtUsuario.getScene().getWindow());

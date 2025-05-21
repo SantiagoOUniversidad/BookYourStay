@@ -16,17 +16,19 @@ public class BookYourStay {
     public List<Alojamiento> alojamientos;
     public List<Reserva> reservas;
     public List<Oferta> ofertas;
+    public List<Administrador> administradores;
 
-    public BookYourStay(List clientes, List alojamientos, List reservas, List ofertas) {
+    public BookYourStay(List clientes, List alojamientos, List reservas, List ofertas, List administradores) {
         this.clientes = new ArrayList<Cliente>();
         this.alojamientos = new ArrayList<Alojamiento>();
         this.reservas = new ArrayList<Reserva>();
         this.ofertas = new ArrayList<Oferta>();
+        this.administradores = new ArrayList<Administrador>();
     }
 
     public static BookYourStay getInstancia() {
         if (instancia == null) {
-            instancia = new BookYourStay(null, null, null, null);
+            instancia = new BookYourStay(null, null, null, null, null);
             return instancia;
         } else {
             return instancia;

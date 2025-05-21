@@ -117,4 +117,15 @@ public class AdministradorServicios {
                 .mapToDouble(Reserva::getPrecioTotal)
                 .sum();
     }
+
+    // Funcion para validar inicio de administrador
+    public Administrador validarAdministrador(String id, String password) throws Exception {
+        if (id == null || id.isEmpty() || password == null || password.isEmpty()) throw camposVacios;
+        for (Administrador administrador : bookYourStay.getAdministradores()){
+            if (administrador.getCedula().equals(id) && administrador.getPassword().equals(password)){
+                return administrador;
+            }
+        }
+        throw new Exception("No se encontro el administrador");
+    }
 }

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Administrador;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 
 public class BookYourStayServicio {
@@ -13,5 +14,9 @@ public class BookYourStayServicio {
 
     public Cliente validarInicioCliente(String id, String password) throws Exception {
         return clienteServicio.validarCliente(id,password);
+    }
+
+    public Administrador validarInicioAdministrador(String id, String password) throws Exception {
+        return administradorServicio.validarAdministrador(id, password);
     }
 }
