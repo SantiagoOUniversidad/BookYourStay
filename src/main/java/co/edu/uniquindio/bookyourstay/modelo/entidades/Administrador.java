@@ -1,8 +1,5 @@
 package co.edu.uniquindio.bookyourstay.modelo.entidades;
 
-import java.util.List;
-
-import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import lombok.*;
 import lombok.experimental.*;
 
@@ -30,12 +27,13 @@ public class Administrador extends Persona{
         return instancia;
     }
 
-    public static void crearInstancia(String cedula, String nombre, String telefono, String email, String password) {
+    public static Administrador crearInstancia(String cedula, String nombre, String telefono, String email, String password) {
         if (instancia == null) {
             instancia = Administrador.builder().cedula(cedula).nombre(nombre).telefono(telefono).email(email).password(password).build();
         } else {
             throw new IllegalStateException("Ya existe un administrador");
         }
+        return null;
     }
 
 }
