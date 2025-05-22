@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -28,18 +29,6 @@ public class PanelClienteControlador implements Initializable {
     private Label txtBienvenido;
 
     @FXML
-    private Button btnMisReservas;
-
-    @FXML
-    private Button btnResenas;
-
-    @FXML
-    private Button btnReservar;
-
-    @FXML
-    private Button btnBilletera;
-
-    @FXML
     void onMiCuentaAction(ActionEvent event) {
         try {
             ControladorPrincipal.openView("PanelMiCuenta.fxml", "Mi Cuenta", new Stage());
@@ -47,6 +36,27 @@ public class PanelClienteControlador implements Initializable {
         } catch (Exception e) {
             controladorPrincipal.crearAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+
+    @FXML
+    void onMisReservasAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onReservarAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onReseñaAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onVolver(ActionEvent event) throws IOException {
+        ControladorPrincipal.openView("InicioSesionCliente.fxml", "Inicio Sesion", new Stage());
+        ControladorPrincipal.cerrarVentana((Stage) btnMiCuenta.getScene().getWindow());
     }
 
     @FXML
