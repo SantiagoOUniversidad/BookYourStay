@@ -21,12 +21,6 @@ public class PanelMiCuentaControlador {
     private Button btnEditarDatos;
 
     @FXML
-    private Button btnEliminarCuenta;
-
-    @FXML
-    private Button btnVolver;
-
-    @FXML
     void onEditarDatosAction(ActionEvent event) {
     }
 
