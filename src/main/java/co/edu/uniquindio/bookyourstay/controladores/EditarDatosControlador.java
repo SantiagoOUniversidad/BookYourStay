@@ -27,15 +27,6 @@ public class EditarDatosControlador {
     private TextField txtTelefono;
 
     @FXML
-    private TextField txtContrasena;
-
-    @FXML
-    private Button btnGuardar;
-
-    @FXML
-    private Button btnVolver;
-
-    @FXML
     void onVolver(ActionEvent event) throws IOException {
         ControladorPrincipal.openView("PanelCliente.fxml", "Inicio", new Stage());
         ControladorPrincipal.cerrarVentana((Stage) txtNombre.getScene().getWindow());
