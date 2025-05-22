@@ -30,7 +30,7 @@ public class PanelAdministradorControlador {
 
     }
 
-    // Metodo para actualizar el panel
+    // Metodo para actualizar el panel principal
     private Parent cargarPanel(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
