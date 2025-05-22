@@ -11,11 +11,14 @@ import java.io.IOException;
 
 public class BookYourStayApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws Exception {
         ControladorPrincipal.openView("InicioSesionCliente.fxml","Inicio Sesion", stage);
 
-        Administrador administrador = Administrador.crearInstancia("0000", "Innombrable", "3023130890",
+        // Creamos el administrador
+        Administrador administrador = new Administrador("0000", "Innombrable", "3023130890",
                 "santiago.olarteb@uqvirtual.edu.co", "123");
+
+        ControladorPrincipal.getInstancia().getBookYourStayServicio().agregarAdministrador(administrador);
     }
 
     public static void main(String[] args) {

@@ -22,10 +22,6 @@ public class AdministradorServicios {
     // CONSTANTES
     Exception camposVacios = new Exception("Ningún campo puede estar vacío");
 
-    public Administrador buscarAdministrador() throws Exception {
-        return Administrador.getInstancia();
-    }
-
     // Crear Alojamiento
     public Alojamiento crearAlojamiento(TipoAlojamiento tipo, String nombre, String ciudad, String descripcion, ImageView imagen, float precioPorNoche, int capacidadMaxima, List<TipoServicio> servicios, float costoExtra, List<Habitacion> habitaciones) throws Exception {
         if (tipo == null || nombre == null || ciudad == null || descripcion == null || imagen == null || precioPorNoche <= 0 || capacidadMaxima <= 0 || servicios == null || costoExtra <= 0) {
@@ -127,5 +123,9 @@ public class AdministradorServicios {
             }
         }
         throw new Exception("No se encontro el administrador");
+    }
+
+    public void agregarAdministrador(Administrador administrador){
+        bookYourStay.getAdministradores().add(administrador);
     }
 }

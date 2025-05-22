@@ -36,4 +36,8 @@ public class BookYourStayServicio {
     public Administrador validarInicioAdministrador(String id, String password) throws Exception {
         return administradorServicio.validarAdministrador(id, password);
     }
+
+    public void agregarAdministrador(Administrador administrador) throws Exception {
+        administradorServicio.agregarAdministrador(administrador);
+    }
 }
