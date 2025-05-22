@@ -2,16 +2,19 @@ package co.edu.uniquindio.bookyourstay.servicios;
 
 import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
+import co.edu.uniquindio.bookyourstay.modelo.entidades.ClienteTemporal;
 
 public class ClienteServicios {
 
     private final BookYourStay bookYourStay = BookYourStay.getInstancia();
+    private EnviarCodigoVerificacionServicios enviarCodigoVerificacionServicios = new EnviarCodigoVerificacionServicios();
 
     //CONSTANTES
     Exception camposVacios = new Exception("Ningún campo puede estar vacío");
     Exception clienteNoExistente = new Exception("Cliente no existe");
 
-    public Cliente crearCliente(String cedula, String nombre, String telefono, String email, String password) throws Exception {
+    // Crea cliente sin verificacion
+    public ClienteTemporal crearClienteSinVerificacion(String cedula, String nombre, String telefono, String email, String password) throws Exception {
         if (cedula == null || nombre == null || telefono == null || email == null || password == null || cedula.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || email.isEmpty() || password.isEmpty()) {
             throw camposVacios;
         }
@@ -20,9 +23,28 @@ public class ClienteServicios {
             throw new Exception("El cliente ya existe");
         } catch (Exception adminNoEncontrado) {
         }
-        Cliente nuevoAdministrador = Cliente.builder().cedula(cedula).nombre(nombre).telefono(telefono).email(email).password(password).build();
-        bookYourStay.clientes.add(nuevoAdministrador);
-        return nuevoAdministrador;
+        ClienteTemporal nuevoClienteTemporal = ClienteTemporal.builder().cedula(cedula).nombre(nombre).telefono(telefono).email(email).password(password).build();
+        ClienteTemporal.clientesTemporales.add(nuevoClienteTemporal);
+        enviarCodigoVerificacionServicios.solicitarClave(email);
+        return nuevoClienteTemporal;
+    }
+
+    // Crea cliente verificado que si ingresa a la lista de clientes
+    public Cliente crearClienteVerificado(ClienteTemporal clienteTemporal, String codigoIngresado) throws Exception {
+        String cedula = clienteTemporal.getCedula();
+        String nombre = clienteTemporal.getNombre();
+        String telefono = clienteTemporal.getTelefono();
+        String email = clienteTemporal.getEmail();
+        String password = clienteTemporal.getPassword();
+        try {
+            enviarCodigoVerificacionServicios.verificarCodigo(email, codigoIngresado);
+            Cliente nuevoCliente = Cliente.builder().cedula(cedula).nombre(nombre).telefono(telefono).email(email).password(password).build();
+            bookYourStay.clientes.add(nuevoCliente);
+            ClienteTemporal.clientesTemporales.remove(clienteTemporal);
+            return nuevoCliente;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     public Cliente buscarCliente(String cedula) throws Exception{
@@ -37,31 +59,26 @@ public class ClienteServicios {
         return clienteFiltrado;
     }
 
-    public Cliente actualizarCliente(String cedula, String nombre, String telefono, String email) throws Exception {
-        if (cedula == null || nombre == null || telefono == null || email == null || cedula.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
+    public Cliente actualizarCliente(Cliente clienteActualizar, String nombre, String telefono, String email) throws Exception {
+        if (clienteActualizar == null || nombre == null || telefono == null || email == null || nombre.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
             throw camposVacios;
         }
-        Cliente clienteActualizar = buscarCliente(cedula);
-        if (clienteActualizar == null) {
-            throw clienteNoExistente;
-        }
-        clienteActualizar.setCedula(cedula);
         clienteActualizar.setNombre(nombre);
         clienteActualizar.setTelefono(telefono);
         clienteActualizar.setEmail(email);
         return clienteActualizar;
     }
 
-    public boolean eliminarCliente(String cedula) throws Exception {
+    public void eliminarCliente(String cedula) throws Exception {
         if (cedula == null || cedula.isEmpty()) {
             throw camposVacios;
         }
-        Cliente clienteEliminar = buscarCliente(cedula);
-        if (clienteEliminar == null) {
-            throw clienteNoExistente;
+        try {
+            Cliente clienteEliminar = buscarCliente(cedula);
+            bookYourStay.clientes.remove(clienteEliminar);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
         }
-        bookYourStay.clientes.remove(clienteEliminar);
-        return true;
     }
 
     public Cliente validarCliente(String id, String password) throws Exception {

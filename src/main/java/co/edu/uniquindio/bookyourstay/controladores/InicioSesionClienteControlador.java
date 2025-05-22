@@ -46,7 +46,7 @@ public class InicioSesionClienteControlador {
             controladorPrincipal.crearAlerta("Inicio de sesion exitoso", Alert.AlertType.INFORMATION);
             Sesion sesion = Sesion.getInstancia();
             sesion.setCliente(cliente);
-            ControladorPrincipal.openView("panelCliente.fxml","Bienvenido",new Stage());
+            ControladorPrincipal.openView("PanelCliente.fxml","Bienvenido",new Stage());
             ControladorPrincipal.cerrarVentana((Stage) txtUsuario.getScene().getWindow());
         } catch (Exception e) {
             controladorPrincipal.crearAlerta(e.getMessage(), Alert.AlertType.ERROR);

@@ -1,0 +1,57 @@
+package co.edu.uniquindio.bookyourstay.controladores;
+
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
+import co.edu.uniquindio.bookyourstay.modelo.vo.Sesion;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PanelClienteControlador implements Initializable {
+
+    private final ControladorPrincipal controladorPrincipal = ControladorPrincipal.getInstancia();
+    private final Cliente cliente = Sesion.getInstancia().getCliente();
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setTxtBienvenido();
+    }
+
+    @FXML
+    private Button btnMiCuenta;
+
+    @FXML
+    private Label txtBienvenido;
+
+    @FXML
+    private Button btnMisReservas;
+
+    @FXML
+    private Button btnResenas;
+
+    @FXML
+    private Button btnReservar;
+
+    @FXML
+    private Button btnBilletera;
+
+    @FXML
+    void onMiCuentaAction(ActionEvent event) {
+        try {
+            ControladorPrincipal.openView("PanelMiCuenta.fxml", "Mi Cuenta", new Stage());
+            ControladorPrincipal.cerrarVentana((Stage) btnMiCuenta.getScene().getWindow());
+        } catch (Exception e) {
+            controladorPrincipal.crearAlerta(e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    void setTxtBienvenido(){
+        txtBienvenido.setText("Bienvenido, " + cliente.getNombre());
+    }
+
+}

@@ -48,7 +48,7 @@
             <Label text="Correo electrónico:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <TextField fx:id="txtCorreo" minHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Telefono:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="txtDireccion" minHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtTelefono" minHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
             <PasswordField fx:id="txtPassword" minHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>

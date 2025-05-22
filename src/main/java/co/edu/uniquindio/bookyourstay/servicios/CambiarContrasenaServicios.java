@@ -20,7 +20,7 @@ public class CambiarContrasenaServicios {
             String emailCliente = clienteRecuperar.getEmail();
             String codigoGenerado = generarCodigo();
             clavesGeneradas.put(cedula, codigoGenerado);
-            envioEmail.enviarCorreo(emailCliente, "Código de inicio de sesion | Book Your Stay", "Tu código es: " + codigoGenerado);
+            envioEmail.enviarCorreo(emailCliente, "Código de recuperacion | Book Your Stay", "Tu código es: " + codigoGenerado);
             return true;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

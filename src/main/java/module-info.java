@@ -3,6 +3,7 @@ module co.edu.uniquindio.bookyourstay {
     requires javafx.fxml;
     requires static lombok;
     requires jakarta.mail;
+    requires java.desktop;
 
 
     opens co.edu.uniquindio.bookyourstay to javafx.fxml;
