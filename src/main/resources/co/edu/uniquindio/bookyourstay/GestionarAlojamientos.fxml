@@ -119,8 +119,11 @@
                         <TableColumn fx:id="tbcCiudad" prefWidth="90.39996337890625" text="Ciudad" />
                         <TableColumn fx:id="tbcPrecioNoche" prefWidth="79.99998474121094" text="Precio noche" />
                         <TableColumn fx:id="tbcCapacidad" prefWidth="97.5999755859375" text="CapacidadMax" />
-                        <TableColumn fx:id="tbcTipoAlojamiento" prefWidth="84.7999267578125" text="Tipo " />
+                        <TableColumn fx:id="tbcTipoAlojamiento" maxWidth="1.7976931348623157E308" prefWidth="85.60001220703123" text="Tipo " />
                      </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                   <HBox alignment="CENTER" prefHeight="105.0" prefWidth="502.0" spacing="30.0">
                      <children>
