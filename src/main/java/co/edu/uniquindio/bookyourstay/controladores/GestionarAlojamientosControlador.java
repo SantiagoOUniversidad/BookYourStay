@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Habitacion;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoServicio;
 import javafx.scene.control.*;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoAlojamiento;
@@ -166,7 +167,6 @@ public class GestionarAlojamientosControlador {
         tblAlojamientos.setOnMouseClicked(e -> {
             //Obtener la nota seleccionada
             Alojamiento selected = tblAlojamientos.getSelectionModel().getSelectedItem();
-
             if(selected != null){
                 selectedAlojamiento = selected;
                 mostrarInformacionAlojamiento(selectedAlojamiento);
@@ -186,11 +186,19 @@ public class GestionarAlojamientosControlador {
             txtPrecioNoche.setText(String.valueOf(alojamiento.getPrecioPorNoche()));
             imageFotoPerfil.setImage(alojamiento.getImagen());
             tipoAlojamiento.setValue(alojamiento.getTipoAlojamiento());
+            // Marcar los checkboxes según los servicios del alojamiento
+            List<TipoServicio> servicios = alojamiento.getServicios();
+
+            checkBoxPiscina.setSelected(servicios.contains(TipoServicio.PISCINA));
+            checkBoxWifi.setSelected(servicios.contains(TipoServicio.WIFI));
+            checkBoxDesayuno.setSelected(servicios.contains(TipoServicio.DESAYUNO));
+
         }
     }
 
     private void agregarAlojamiento(){
         List<TipoServicio> servicios = new ArrayList<>();
+        List<Habitacion> habitacions = new ArrayList<>();
         if(checkBoxPiscina.isSelected()){
             servicios.add(TipoServicio.PISCINA);
         }
@@ -201,7 +209,8 @@ public class GestionarAlojamientosControlador {
             servicios.add(TipoServicio.DESAYUNO);
         }
         try{
-            Alojamiento alojamiento = bookYourStayServicio.agregarAlojamiento(tipoAlojamiento.getValue(),txtNombre.getText(),txtCiudad.getText(),txtDescripcion.getText(),imageFotoPerfil.getImage(),Float.parseFloat(txtPrecioNoche.getText()),Integer.parseInt(txtCapacidadMaxima.getText()),servicios,Float.parseFloat(txtCostoExtra.getText()),null);
+            Alojamiento alojamiento = bookYourStayServicio.agregarAlojamiento(tipoAlojamiento.getValue(),txtNombre.getText(),txtCiudad.getText(),txtDescripcion.getText(),imageFotoPerfil.getImage(),Float.parseFloat(txtPrecioNoche.getText()),Integer.parseInt(txtCapacidadMaxima.getText()),servicios,Float.parseFloat(txtCostoExtra.getText()),habitacions);
+            listaAlojamientos.add(alojamiento);
             controladorPrincipal.crearAlerta("Alojamiento registradon con exito", Alert.AlertType.INFORMATION);
             limpiarCampos();
         } catch (Exception e) {
