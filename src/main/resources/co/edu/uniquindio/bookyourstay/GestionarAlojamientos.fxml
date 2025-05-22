@@ -124,27 +124,13 @@
                   </TableView>
                   <HBox alignment="CENTER" prefHeight="105.0" prefWidth="502.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#onAgregarAlojamientoAction" stylesheets="@../../../../../../../../gestionar_contactos/gestionar_contactos/src/main/resources/values/style.css" text="Agregar Alojamiento" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#onAgregarAlojamientoAction" style="-fx-background-color: green;" text="Agregar Alojamiento" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
-                           <styleClass>
-                              <String fx:value="verPedido-button" />
-                              <String fx:value="shadow" />
-                           </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#onActualizarAlojamientoAction" stylesheets="@../../../../../../../../gestionar_contactos/gestionar_contactos/src/main/resources/values/style.css" text="Actualizar Alojamiento">
-                           <styleClass>
-                              <String fx:value="search-button" />
-                              <String fx:value="shadow" />
-                           </styleClass>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#onEliminarAlojamientoAction" stylesheets="@../../../../../../../../gestionar_contactos/gestionar_contactos/src/main/resources/values/style.css" text="Eliminar Alojamiento" textFill="WHITE">
-                           <styleClass>
-                              <String fx:value="volver-button" />
-                              <String fx:value="shadow" />
-                           </styleClass>
-                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onActualizarAlojamientoAction" text="Actualizar Alojamiento" />
+                        <Button mnemonicParsing="false" onAction="#onEliminarAlojamientoAction" style="-fx-background-color: red;" text="Eliminar Alojamiento" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>

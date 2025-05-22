@@ -54,6 +54,25 @@ public class ControladorPrincipal {
         }
     }
 
+    // Funcion para abrir pantallas
+    public static void openViewPanel(String archivo, String titulo, Stage primaryStage) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(BookYourStayApplication.class.getResource(archivo));
+            Parent rootLayout = loader.load();
+
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle(titulo);
+            primaryStage.setMaximized(true);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     // Función para cerrar ventanas
     public static void cerrarVentana(Stage stage){
         stage.close();

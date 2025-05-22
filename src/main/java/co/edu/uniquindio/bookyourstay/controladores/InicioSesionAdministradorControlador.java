@@ -36,7 +36,7 @@ public class InicioSesionAdministradorControlador {
         try{
             Administrador administrador = bookYourStayServicio.validarInicioAdministrador(txtUsuario.getText(), txtPassword.getText());
             controladorPrincipal.crearAlerta("Inicio de sesion exitoso", Alert.AlertType.INFORMATION);
-            ControladorPrincipal.openView("panelAdministrador.fxml", "Bienvenido Administrador", new Stage());
+            ControladorPrincipal.openViewPanel("panelAdministrador.fxml", "Bienvenido Administrador", new Stage());
             ControladorPrincipal.cerrarVentana((Stage) txtPassword.getScene().getWindow());
         } catch (Exception e) {
             controladorPrincipal.crearAlerta(e.getMessage(), Alert.AlertType.ERROR);

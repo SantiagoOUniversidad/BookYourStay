@@ -16,7 +16,7 @@ public class PanelAdministradorControlador {
 
     @FXML
     void gestionarAlojamientos(ActionEvent event) {
-        Parent node = cargarPanel("GestionarAlojamientos.fxml");
+        Parent node = cargarPanel("/co/edu/uniquindio/bookyourstay/GestionarAlojamientos.fxml");
         panelPrincipal.getChildren().setAll(node);
     }
 
