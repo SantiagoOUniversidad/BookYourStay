@@ -18,10 +18,8 @@ public class ClienteServicios {
         if (cedula == null || nombre == null || telefono == null || email == null || password == null || cedula.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || email.isEmpty() || password.isEmpty()) {
             throw camposVacios;
         }
-        try {
-            buscarCliente(cedula);
+        if (buscarCliente(cedula) == null) {
             throw new Exception("El cliente ya existe");
-        } catch (Exception adminNoEncontrado) {
         }
         ClienteTemporal nuevoClienteTemporal = ClienteTemporal.builder().cedula(cedula).nombre(nombre).telefono(telefono).email(email).password(password).build();
         ClienteTemporal.clientesTemporales.add(nuevoClienteTemporal);
@@ -55,7 +53,7 @@ public class ClienteServicios {
         Cliente clienteFiltrado = bookYourStay.clientes.stream()
                 .filter(cliente -> cliente.getCedula().equals(cedula))
                 .findFirst()
-                .orElseThrow(() -> new Exception(clienteNoEncontrado));
+                .orElse(null);
         return clienteFiltrado;
     }
 
