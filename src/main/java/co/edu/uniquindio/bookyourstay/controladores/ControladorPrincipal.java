@@ -65,7 +65,7 @@ public class ControladorPrincipal {
             primaryStage.setScene(scene);
             primaryStage.setTitle(titulo);
             primaryStage.setMaximized(true);
-            primaryStage.setResizable(false);
+            primaryStage.setResizable(true);
             primaryStage.show();
         } catch (IOException e) {
             // TODO Auto-generated catch block
