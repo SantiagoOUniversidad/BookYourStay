@@ -22,20 +22,6 @@ public class AdministradorServicios {
     // CONSTANTES
     Exception camposVacios = new Exception("Ningún campo puede estar vacío");
 
-    // Crear Alojamiento
-    public Alojamiento crearAlojamiento(TipoAlojamiento tipo, String nombre, String ciudad, String descripcion, ImageView imagen, float precioPorNoche, int capacidadMaxima, List<TipoServicio> servicios, float costoExtra, List<Habitacion> habitaciones) throws Exception {
-        if (tipo == null || nombre == null || ciudad == null || descripcion == null || imagen == null || precioPorNoche <= 0 || capacidadMaxima <= 0 || servicios == null || costoExtra <= 0) {
-            throw camposVacios;
-        }
-        try {
-            buscarAlojamiento(nombre);
-            throw new Exception("El alojamiento ya existe");
-        } catch (Exception e) {
-        }
-        Alojamiento alojamiento = FactoryAlojamiento.crearAlojamiento(tipo, nombre, ciudad, descripcion, imagen, precioPorNoche, capacidadMaxima, servicios, costoExtra, habitaciones);
-        bookYourStay.alojamientos.add(alojamiento);
-        return alojamiento;
-    }
 
     // Buscar Alojamiento por nombre
     public Alojamiento buscarAlojamiento(String nombre) throws Exception {

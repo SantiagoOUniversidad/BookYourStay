@@ -2,7 +2,7 @@ package co.edu.uniquindio.bookyourstay.modelo.factory;
 
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoAlojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoServicio;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import java.util.List;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -20,7 +20,7 @@ public class Alojamiento {
     public String nombre;
     public String ciudad;
     public String description;
-    public ImageView imagen;
+    public Image imagen;
     public float precioPorNoche;
     public int capacidadMax;
     public List<TipoServicio> servicios;
