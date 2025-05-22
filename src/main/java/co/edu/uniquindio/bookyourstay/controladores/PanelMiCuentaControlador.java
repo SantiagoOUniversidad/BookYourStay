@@ -21,7 +21,9 @@ public class PanelMiCuentaControlador {
     private Button btnEditarDatos;
 
     @FXML
-    void onEditarDatosAction(ActionEvent event) {
+    void onEditarDatosAction(ActionEvent event) throws IOException {
+        ControladorPrincipal.openView("EditarDatos.fxml", "Editar Datos", new Stage());
+        ControladorPrincipal.cerrarVentana((Stage) btnEditarDatos.getScene().getWindow());
     }
 
     @FXML
