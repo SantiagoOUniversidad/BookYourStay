@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bookyourstay.repositorio;
 
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Reserva;
 
 import java.util.ArrayList;
@@ -22,5 +23,15 @@ public class ReservaRepositorio {
 
     public List<Reserva> listarReservas() {
         return reservas;
+    }
+
+    public List<Reserva> listarReservasCliente(Cliente cliente){
+        List<Reserva> reservasFiltradas = new ArrayList<>();
+        for (Reserva reserva : reservas) {
+            if(reserva.getCliente().equals(cliente)){
+                reservasFiltradas.add(reserva);
+            }
+        }
+        return reservasFiltradas;
     }
 }

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Reserva;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import co.edu.uniquindio.bookyourstay.repositorio.ReservaRepositorio;
@@ -53,4 +54,12 @@ public class ReservaServicios {
 
         return (diasTotales == 0) ? 0 : (diasReservados / diasTotales) * 100;
     }
-}
+
+    public List<Reserva> listarReservasCliente(Cliente cliente){
+        return reservaRepositorio.listarReservasCliente(cliente);
+    }
+
+    public void eliminarReserva(Reserva reserva) {
+        reservaRepositorio.eliminarReserva(reserva);
+    }
+ }

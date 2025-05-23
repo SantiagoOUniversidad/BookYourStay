@@ -25,6 +25,14 @@ public class BookYourStayServicio {
         reservaServicios = new ReservaServicios();
     }
 
+    public List<Reserva> listarReservasCliente(Cliente cliente){
+        return reservaServicios.listarReservasCliente(cliente);
+    }
+
+    public void eliminarReserva(Reserva reserva) {
+        reservaServicios.eliminarReserva(reserva);
+    }
+
     public List<Administrador> listarAdministrador() throws Exception {
         return administradorServicio.listarAdministradores();
     }
