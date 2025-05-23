@@ -5,6 +5,7 @@ import co.edu.uniquindio.bookyourstay.modelo.entidades.Administrador;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.ClienteTemporal;
+import co.edu.uniquindio.bookyourstay.servicios.BookYourStayServicio;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,7 +16,7 @@ import java.io.IOException;
 public class BookYourStayApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        BookYourStay bookYourStay = BookYourStay.getInstancia();
+        BookYourStayServicio bookYourStay = ControladorPrincipal.getInstancia().getBookYourStayServicio();
         ControladorPrincipal.openView("InicioSesionCliente.fxml","Inicio Sesion", stage);
 
         // Creamos el administrador
@@ -25,7 +26,7 @@ public class BookYourStayApplication extends Application {
 
         // Creamos un cliente de prueba
         Cliente clientePrueba = new Cliente("0001", "Prueba", "3112417691","olartebuitrago@icloud.com", "321");
-        bookYourStay.clientes.add(clientePrueba);
+        bookYourStay.agregarCliente(clientePrueba);
     }
 
     public static void main(String[] args) {

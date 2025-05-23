@@ -8,6 +8,7 @@ import co.edu.uniquindio.bookyourstay.modelo.enums.TipoAlojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoServicio;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.factory.FactoryAlojamiento;
+import co.edu.uniquindio.bookyourstay.repositorio.AdministradorRepositorio;
 import javafx.scene.image.ImageView;
 
 import java.time.LocalDate;
@@ -15,95 +16,18 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class AdministradorServicios {
+    private final AdministradorRepositorio administradorRepositorio;
 
-    // Obtenemos la instancia de "BookYourStay" (Empresa)
-    private final BookYourStay bookYourStay = BookYourStay.getInstancia();
-
+    public AdministradorServicios(){
+        administradorRepositorio = new AdministradorRepositorio();
+    }
     // CONSTANTES
     Exception camposVacios = new Exception("Ningún campo puede estar vacío");
-
-
-    // Buscar Alojamiento por nombre
-    public Alojamiento buscarAlojamiento(String nombre) throws Exception {
-        if (nombre == null || nombre.isEmpty()) {
-            throw camposVacios;
-        }
-        Alojamiento alojamientoFiltrado = bookYourStay.alojamientos.stream()
-                .filter(a -> nombre.equals(a.getNombre()))
-                .findFirst()
-                .orElse(null);
-        if (alojamientoFiltrado == null) {
-            throw new Exception("El alojamiento no existe");
-        }
-        return alojamientoFiltrado;
-    }
-
-    // Actualizar un Alojamiento
-    public void actualizarAlojamiento(String nombre, Alojamiento actualizado) throws Exception {
-        if (nombre == null || nombre.isEmpty()) throw camposVacios;
-        for (Alojamiento alojamiento : bookYourStay.alojamientos) {
-            if (nombre.equals(alojamiento.getNombre())) {
-                alojamiento.setCiudad(actualizado.getCiudad());
-                alojamiento.setImagen(actualizado.getImagen());
-                alojamiento.setCostoExtra(actualizado.getCostoExtra());
-                alojamiento.setCapacidadMax(actualizado.getCapacidadMax());
-                alojamiento.setPrecioPorNoche(actualizado.getPrecioPorNoche());
-                alojamiento.setServicios(actualizado.getServicios());
-                alojamiento.setDescription(actualizado.getDescription());
-                break;
-            }
-        }
-    }
-
-    // Eliminar Alojamiento
-    public void eliminarAlojamiento(Alojamiento alojamiento) throws Exception {
-        if(alojamiento == null) throw new Exception("Seleccione un alojamiento");
-        bookYourStay.alojamientos.remove(alojamiento);
-    }
-
-    // Calcular ocupacion porcentual
-    public float calcularOcupacion(Alojamiento alojamiento) {
-        List<Reserva> reservasAlojamiento = bookYourStay.getReservas().stream()
-                .filter(r -> r.getAlojamiento().equals(alojamiento))
-                .toList();
-
-        if (reservasAlojamiento.isEmpty()) {
-            return 0;
-        }
-
-        // Encontrar la fecha más temprana y más tardía
-        LocalDate fechaInicio = reservasAlojamiento.stream()
-                .map(Reserva::getFechaInicio)
-                .min(LocalDate::compareTo)
-                .orElseThrow();
-
-        LocalDate fechaFinal = reservasAlojamiento.stream()
-                .map(Reserva::getFechaFinal)
-                .max(LocalDate::compareTo)
-                .orElseThrow();
-
-        float diasTotales = ChronoUnit.DAYS.between(fechaInicio, fechaFinal);
-
-        float diasReservados = reservasAlojamiento.stream()
-                .mapToLong(r -> ChronoUnit.DAYS.between(r.getFechaInicio(), r.getFechaFinal()))
-                .sum();
-
-        return (diasTotales == 0) ? 0 : (diasReservados / diasTotales) * 100;
-    }
-
-    // Calcular ganancias totales
-    public float calcularGananciasTotales(Alojamiento alojamiento) {
-        List<Reserva> reservas = bookYourStay.getReservas();
-        return (float) reservas.stream()
-                .filter(r -> r.getAlojamiento().equals(alojamiento))
-                .mapToDouble(Reserva::getPrecioTotal)
-                .sum();
-    }
 
     // Funcion para validar inicio de administrador
     public Administrador validarAdministrador(String id, String password) throws Exception {
         if (id == null || id.isEmpty() || password == null || password.isEmpty()) throw camposVacios;
-        for (Administrador administrador : bookYourStay.getAdministradores()){
+        for (Administrador administrador : administradorRepositorio.listarAdministradores()){
             if (administrador.getCedula().equals(id) && administrador.getPassword().equals(password)){
                 return administrador;
             }
@@ -112,6 +36,6 @@ public class AdministradorServicios {
     }
 
     public void agregarAdministrador(Administrador administrador){
-        bookYourStay.getAdministradores().add(administrador);
+        administradorRepositorio.agregarAdministrador(administrador);
     }
 }
