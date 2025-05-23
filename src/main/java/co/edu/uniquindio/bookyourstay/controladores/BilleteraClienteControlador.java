@@ -56,7 +56,4 @@ public class BilleteraClienteControlador {
         ControladorPrincipal.openView("PanelCliente.fxml", "Inicio", new Stage());
         ControladorPrincipal.cerrarVentana((Stage) btnRecargar.getScene().getWindow());
     }
-
-
-
 }

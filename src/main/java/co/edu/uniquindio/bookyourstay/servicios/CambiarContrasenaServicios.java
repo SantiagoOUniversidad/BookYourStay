@@ -3,6 +3,7 @@ package co.edu.uniquindio.bookyourstay.servicios;
 import co.edu.uniquindio.bookyourstay.controladores.ControladorPrincipal;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Administrador;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
+import co.edu.uniquindio.bookyourstay.repositorio.AdministradorRepositorio;
 import co.edu.uniquindio.bookyourstay.utils.EnvioEmail;
 
 import java.util.HashMap;
@@ -15,6 +16,7 @@ public class CambiarContrasenaServicios {
 
     ClienteServicios clienteServicios = new ClienteServicios();
     EnvioEmail envioEmail = new EnvioEmail();
+    AdministradorRepositorio administradorRepositorio = new AdministradorRepositorio();
     private final BookYourStayServicio bookYourStay = ControladorPrincipal.getInstancia().getBookYourStayServicio();
 
     public boolean solicitarClave(String cedula) throws Exception {
@@ -49,7 +51,7 @@ public class CambiarContrasenaServicios {
 
     public boolean solicitarClaveAdmin() throws Exception {
         try {
-            Administrador administradorRecuperar = bookYourStay.listarAdministrador().stream()
+            Administrador administradorRecuperar = administradorRepositorio.listarAdministradores().stream()
                     .findFirst()
                     .orElse(null);
             String emailAdmin = administradorRecuperar.getEmail();
