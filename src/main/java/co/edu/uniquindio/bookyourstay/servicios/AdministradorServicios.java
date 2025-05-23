@@ -1,18 +1,8 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Administrador;
-import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
-import co.edu.uniquindio.bookyourstay.modelo.entidades.Habitacion;
-import co.edu.uniquindio.bookyourstay.modelo.entidades.Reserva;
-import co.edu.uniquindio.bookyourstay.modelo.enums.TipoAlojamiento;
-import co.edu.uniquindio.bookyourstay.modelo.enums.TipoServicio;
-import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
-import co.edu.uniquindio.bookyourstay.modelo.factory.FactoryAlojamiento;
 import co.edu.uniquindio.bookyourstay.repositorio.AdministradorRepositorio;
-import javafx.scene.image.ImageView;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class AdministradorServicios {
@@ -33,6 +23,10 @@ public class AdministradorServicios {
             }
         }
         throw new Exception("No se encontro el administrador");
+    }
+
+    public List<Administrador> listarAdministradores() throws Exception {
+        return administradorRepositorio.listarAdministradores();
     }
 
     public void agregarAdministrador(Administrador administrador){

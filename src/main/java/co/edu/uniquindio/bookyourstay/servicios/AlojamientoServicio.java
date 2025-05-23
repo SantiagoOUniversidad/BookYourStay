@@ -1,18 +1,13 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
-import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Habitacion;
-import co.edu.uniquindio.bookyourstay.modelo.entidades.Reserva;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoAlojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoServicio;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.factory.FactoryAlojamiento;
 import co.edu.uniquindio.bookyourstay.repositorio.AlojamientoRepositorio;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class AlojamientoServicio {

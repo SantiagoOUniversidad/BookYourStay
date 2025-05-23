@@ -1,12 +1,11 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
+import co.edu.uniquindio.bookyourstay.controladores.ControladorPrincipal;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Administrador;
-import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 import co.edu.uniquindio.bookyourstay.utils.EnvioEmail;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -16,7 +15,7 @@ public class CambiarContrasenaServicios {
 
     ClienteServicios clienteServicios = new ClienteServicios();
     EnvioEmail envioEmail = new EnvioEmail();
-    private final BookYourStay bookYourStay = BookYourStay.getInstancia();
+    private final BookYourStayServicio bookYourStay = ControladorPrincipal.getInstancia().getBookYourStayServicio();
 
     public boolean solicitarClave(String cedula) throws Exception {
         try {
@@ -50,7 +49,7 @@ public class CambiarContrasenaServicios {
 
     public boolean solicitarClaveAdmin() throws Exception {
         try {
-            Administrador administradorRecuperar = bookYourStay.getAdministradores().stream()
+            Administrador administradorRecuperar = bookYourStay.listarAdministrador().stream()
                     .findFirst()
                     .orElse(null);
             String emailAdmin = administradorRecuperar.getEmail();
@@ -64,7 +63,7 @@ public class CambiarContrasenaServicios {
     }
 
     public boolean verificarCodigoAdmin(String codigoIngresado, String nuevaContrasena) throws Exception {
-        Administrador administradorRecuperar = bookYourStay.getAdministradores().stream()
+        Administrador administradorRecuperar = bookYourStay.listarAdministrador().stream()
                 .findFirst()
                 .orElse(null);
         String codigoGuardado = clavesGeneradas.get(administradorRecuperar.getEmail());

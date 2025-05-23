@@ -31,7 +31,7 @@ public class ClienteServicios {
     }
 
     public void agregarCliente(Cliente cliente){
-        clienteRespositorio.agregarCliente(cliente);
+        clienteRepositorio.agregarCliente(cliente);
     }
 
     // Crea cliente verificado que si ingresa a la lista de clientes

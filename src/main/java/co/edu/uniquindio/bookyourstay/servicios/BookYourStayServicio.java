@@ -25,6 +25,10 @@ public class BookYourStayServicio {
         reservaServicios = new ReservaServicios();
     }
 
+    public List<Administrador> listarAdministrador() throws Exception {
+        return administradorServicio.listarAdministradores();
+    }
+
     public Cliente validarInicioCliente(String id, String password) throws Exception {
         return clienteServicio.validarCliente(id,password);
     }

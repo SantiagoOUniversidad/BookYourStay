@@ -1,7 +1,5 @@
 package co.edu.uniquindio.bookyourstay.controladores;
 
-import co.edu.uniquindio.bookyourstay.modelo.entidades.Administrador;
-import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import co.edu.uniquindio.bookyourstay.servicios.AdministradorServicios;
 import co.edu.uniquindio.bookyourstay.servicios.BookYourStayServicio;
