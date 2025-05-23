@@ -19,7 +19,7 @@ public class BookYourStayApplication extends Application {
         ControladorPrincipal.getInstancia().getBookYourStayServicio().agregarAdministrador(administrador);
 
         // Creamos un cliente de prueba
-        Cliente clientePrueba = new Cliente("0001", "Prueba", "3112417691","olartebuitrago@icloud.com", "321");
+        Cliente clientePrueba = new Cliente("0001", "Prueba", "3112417691","olartebuitrago@icloud.com", "321", null);
         bookYourStay.agregarCliente(clientePrueba);
     }
 

@@ -12,9 +12,11 @@ import lombok.experimental.*;
 public class Cliente extends Persona {
 
     //Sin atributos
+    private BilleteraVirtual billeteraVirtual;
 
     //Constructor Super
-    public Cliente(String cedula, String nombre, String telefono, String email, String password) {
+    public Cliente(String cedula, String nombre, String telefono, String email, String password, BilleteraVirtual billeteraVirtual) {
         super(cedula, nombre, telefono, email, password);
+        this.billeteraVirtual = billeteraVirtual;
     }
 }
