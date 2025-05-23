@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import java.util.List;
 
 public class AlojamientoServicio {
-    // Obtenemos la instancia de "BookYourStay" (Empresa)
+    // Obtenemos la instancia de
     private final AlojamientoRepositorio alojamientoRepositorio;
 
     public AlojamientoServicio() {
@@ -26,7 +26,7 @@ public class AlojamientoServicio {
 
     // Crear Alojamiento
     public Alojamiento crearAlojamiento(TipoAlojamiento tipo, String nombre, String ciudad, String descripcion, Image imagen, float precioPorNoche, int capacidadMaxima, List<TipoServicio> servicios, float costoExtra, List<Habitacion> habitaciones) throws Exception {
-        if (tipo == null || nombre == null || ciudad == null || descripcion == null || imagen == null || precioPorNoche < 0 || capacidadMaxima <= 0 || servicios == null || costoExtra < 0) {
+        if (tipo == null || nombre == null || ciudad == null || descripcion == null || imagen == null || precioPorNoche < 0 || capacidadMaxima <= 0 || servicios == null) {
             throw new Exception("No pueden haber campos vacios");
         }
         if (alojamientoRepositorio.bucarAlojamientoPorNombre(nombre) != null) {
@@ -41,7 +41,7 @@ public class AlojamientoServicio {
         alojamientoRepositorio.eliminar(alojamiento);
     }
 
-    public void actualizarAlojamiento(String nombre, Alojamiento actualizado){
+    public void actualizarAlojamiento(String nombre, Alojamiento actualizado) throws Exception {
         Alojamiento encontrado = alojamientoRepositorio.bucarAlojamientoPorNombre(nombre);
         encontrado.setNombre(actualizado.getNombre());
         encontrado.setCiudad(actualizado.getCiudad());
@@ -53,5 +53,13 @@ public class AlojamientoServicio {
         encontrado.setPrecioPorNoche(actualizado.getPrecioPorNoche());
         encontrado.setDescription(actualizado.getDescription());
 
+    }
+
+    public Alojamiento buscarAlojamientoNombre(String nombre) throws Exception{
+        try {
+            return alojamientoRepositorio.bucarAlojamientoPorNombre(nombre);
+        } catch (Exception e) {
+            throw new Exception("El alojamiento no existe");
+        }
     }
 }

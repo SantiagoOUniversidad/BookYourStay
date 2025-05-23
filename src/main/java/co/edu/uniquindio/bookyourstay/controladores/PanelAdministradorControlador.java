@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 public class PanelAdministradorControlador {
     @FXML
     private StackPane panelPrincipal;
@@ -22,13 +26,21 @@ public class PanelAdministradorControlador {
 
     @FXML
     void gestionarOfertas(ActionEvent event) {
-
+        Parent node = cargarPanel("/co/edu/uniquindio/bookyourstay/GestionarOfertas.fxml");
+        panelPrincipal.getChildren().setAll(node);
     }
 
     @FXML
     void obtenerEstadisticas(ActionEvent event) {
 
     }
+
+    @FXML
+    void cerrarSesionAction(ActionEvent event) throws IOException {
+        ControladorPrincipal.openView("InicioSesionCliente.fxml", "Inicio Sesion", new Stage());
+        ControladorPrincipal.cerrarVentana((Stage) panelPrincipal.getScene().getWindow());
+    }
+
 
     // Metodo para actualizar el panel principal
     private Parent cargarPanel(String fxmlFile) {

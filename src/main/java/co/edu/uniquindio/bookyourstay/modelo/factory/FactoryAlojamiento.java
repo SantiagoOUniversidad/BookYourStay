@@ -11,9 +11,37 @@ import java.util.List;
 public class FactoryAlojamiento {
     public static Alojamiento crearAlojamiento(TipoAlojamiento tipo, String nombre, String ciudad, String descripcion, Image imagen, float precioPorNoche, int capacidadMaxima, List<TipoServicio> servicios, float costoExtra, List<Habitacion> habitaciones) {
         return switch (tipo) {
-            case CASA -> new Casa(tipo, nombre, ciudad, descripcion, imagen, precioPorNoche, capacidadMaxima, servicios, costoExtra);
-            case APARTAMENTO -> new Apartamento(tipo, nombre, ciudad, descripcion, imagen, precioPorNoche, capacidadMaxima, servicios, costoExtra);
-            case HOTEL -> new Hotel(tipo, nombre, ciudad, descripcion, imagen, precioPorNoche, capacidadMaxima, servicios, costoExtra, habitaciones);
+            case CASA -> Casa.builder()
+                    .nombre(nombre)
+                    .ciudad(ciudad)
+                    .tipoAlojamiento(tipo)
+                    .description(descripcion)
+                    .imagen(imagen)
+                    .precioPorNoche(precioPorNoche)
+                    .capacidadMax(capacidadMaxima)
+                    .costoExtra(costoExtra)
+                    .build();
+            case APARTAMENTO -> Apartamento.builder()
+                    .nombre(nombre)
+                    .ciudad(ciudad)
+                    .tipoAlojamiento(tipo)
+                    .description(descripcion)
+                    .imagen(imagen)
+                    .precioPorNoche(precioPorNoche)
+                    .capacidadMax(capacidadMaxima)
+                    .costoExtra(costoExtra)
+                    .build();
+            case HOTEL -> Hotel.builder()
+                    .nombre(nombre)
+                    .ciudad(ciudad)
+                    .tipoAlojamiento(tipo)
+                    .description(descripcion)
+                    .imagen(imagen)
+                    .precioPorNoche(precioPorNoche)
+                    .capacidadMax(capacidadMaxima)
+                    .habitaciones(habitaciones)
+                    .costoExtra(0)
+                    .build();
         };
     }
 }

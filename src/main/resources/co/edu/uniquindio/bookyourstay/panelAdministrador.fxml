@@ -24,6 +24,7 @@
             <Button minWidth="200.0" onAction="#gestionarOfertas" text="Gestionar Ofertas" />
             <Button minWidth="200.0" onAction="#obtenerEstadisticas" text="Obtener Estadisticas" />
             <Button minWidth="200.0" mnemonicParsing="false" onAction="#cambiarContrasena" text="Cambiar Contraseña" />
+            <Button minWidth="200.0" mnemonicParsing="false" onAction="#cerrarSesionAction" text="Cerrar Sesión" />
          </children>
       </VBox>
       <StackPane fx:id="panelPrincipal" HBox.hgrow="ALWAYS" />

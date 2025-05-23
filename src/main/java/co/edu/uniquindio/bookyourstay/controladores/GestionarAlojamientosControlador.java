@@ -1,13 +1,17 @@
 package co.edu.uniquindio.bookyourstay.controladores;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Habitacion;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoServicio;
+import co.edu.uniquindio.bookyourstay.modelo.factory.Hotel;
+import co.edu.uniquindio.bookyourstay.modelo.vo.Sesion;
 import javafx.scene.control.*;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoAlojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
@@ -21,6 +25,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class GestionarAlojamientosControlador {
     // Obtenemos la instancia de el controlador principal
@@ -30,6 +35,12 @@ public class GestionarAlojamientosControlador {
     // Crear lista de la tabla
     ObservableList<Alojamiento> listaAlojamientos = FXCollections.observableArrayList();
     Alojamiento selectedAlojamiento;
+
+    @FXML
+    private Button btnHabitaciones;
+
+    @FXML
+    private Label lblCostoExtra;
 
     @FXML
     private CheckBox checkBoxDesayuno;
@@ -89,7 +100,7 @@ public class GestionarAlojamientosControlador {
     private TextField txtPrecioNoche;
 
     @FXML
-    void onActualizarAlojamientoAction(ActionEvent event) {
+    void onActualizarAlojamientoAction(ActionEvent event) throws Exception {
         actualizarAlojamiento();
     }
 
@@ -106,6 +117,16 @@ public class GestionarAlojamientosControlador {
     @FXML
     void onSeleccionarFotoAction(ActionEvent event) {
         seleccionarFotoPerfil();
+    }
+
+    @FXML
+    void onGestionarHabitaciones(ActionEvent event) throws IOException {
+        if (selectedAlojamiento != null) {
+            Sesion.getInstancia().setHabitaciones(new ArrayList<>(selectedAlojamiento.getHabitaciones()));
+        } else {
+            Sesion.getInstancia().getHabitaciones().clear();
+        }
+        ControladorPrincipal.openView("gestionarHabitaciones.fxml", "Habitaciones", new Stage());
     }
 
     @FXML
@@ -130,6 +151,32 @@ public class GestionarAlojamientosControlador {
 
     private void configuracionInicial(){
         tipoAlojamiento.getItems().addAll(TipoAlojamiento.values());
+
+
+        // Listener para mostrar/ocultar elementos según selección
+        tipoAlojamiento.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal == TipoAlojamiento.CASA || newVal == TipoAlojamiento.APARTAMENTO) {
+                // Mostrar Label y TextField
+                lblCostoExtra.setVisible(true);
+                lblCostoExtra.setManaged(true);
+                txtCostoExtra.setVisible(true);
+                txtCostoExtra.setManaged(true);
+
+                // Ocultar el botón
+                btnHabitaciones.setVisible(false);
+                btnHabitaciones.setManaged(false);
+            } else if (newVal == TipoAlojamiento.HOTEL) {
+                // Ocultar Label y TextField
+                lblCostoExtra.setVisible(false);
+                lblCostoExtra.setManaged(false);
+                txtCostoExtra.setVisible(false);
+                txtCostoExtra.setManaged(false);
+
+                // Mostrar el botón
+                btnHabitaciones.setVisible(true);
+                btnHabitaciones.setManaged(true);
+            }
+        });
     }
 
     private void initView() {
@@ -197,8 +244,16 @@ public class GestionarAlojamientosControlador {
     }
 
     private void agregarAlojamiento(){
+        List<Habitacion> habitacionesCopiadas = Sesion.getInstancia().getHabitaciones().stream()
+                .map(Habitacion::new) // usa el constructor copia
+                .collect(Collectors.toList());
         List<TipoServicio> servicios = new ArrayList<>();
-        List<Habitacion> habitacions = new ArrayList<>();
+        float costoExtra;
+        if (txtCostoExtra.getText().isEmpty()){
+            costoExtra = 0;
+        } else{
+            costoExtra = Float.parseFloat(txtCostoExtra.getText());
+        }
         if(checkBoxPiscina.isSelected()){
             servicios.add(TipoServicio.PISCINA);
         }
@@ -209,9 +264,11 @@ public class GestionarAlojamientosControlador {
             servicios.add(TipoServicio.DESAYUNO);
         }
         try{
-            Alojamiento alojamiento = bookYourStayServicio.agregarAlojamiento(tipoAlojamiento.getValue(),txtNombre.getText(),txtCiudad.getText(),txtDescripcion.getText(),imageFotoPerfil.getImage(),Float.parseFloat(txtPrecioNoche.getText()),Integer.parseInt(txtCapacidadMaxima.getText()),servicios,Float.parseFloat(txtCostoExtra.getText()),habitacions);
+            Alojamiento alojamiento = bookYourStayServicio.agregarAlojamiento(tipoAlojamiento.getValue(),txtNombre.getText(),txtCiudad.getText(),txtDescripcion.getText(),imageFotoPerfil.getImage(),Float.parseFloat(txtPrecioNoche.getText()),Integer.parseInt(txtCapacidadMaxima.getText()),servicios,costoExtra,habitacionesCopiadas);
+            alojamiento.setHabitaciones(habitacionesCopiadas);
             listaAlojamientos.add(alojamiento);
             controladorPrincipal.crearAlerta("Alojamiento registradon con exito", Alert.AlertType.INFORMATION);
+            limpiarSeleccion();
             limpiarCampos();
         } catch (Exception e) {
             controladorPrincipal.crearAlerta(e.getMessage(), Alert.AlertType.ERROR);
@@ -230,11 +287,16 @@ public class GestionarAlojamientosControlador {
         checkBoxDesayuno.setSelected(false);
         checkBoxPiscina.setSelected(false);
         checkBoxWifi.setSelected(false);
+        txtCostoExtra.setVisible(false);
+        btnHabitaciones.setVisible(false);
+        lblCostoExtra.setVisible(false);
+        Sesion.getInstancia().limpiarLista();
     }
 
     // Función para construir un nuevo Alojamiento
     private Alojamiento buildAlojamiento() {
         List<TipoServicio> servicios = new ArrayList<>();
+        List<Habitacion> habitaciones = Sesion.getInstancia().getHabitaciones();
         if(checkBoxPiscina.isSelected()){
             servicios.add(TipoServicio.PISCINA);
         }
@@ -254,6 +316,7 @@ public class GestionarAlojamientosControlador {
                 .description(txtDescripcion.getText())
                 .servicios(servicios)
                 .costoExtra(Float.parseFloat(txtCostoExtra.getText()))
+                .habitaciones(habitaciones)
                 .build();
     }
 
@@ -264,7 +327,7 @@ public class GestionarAlojamientosControlador {
             limpiarSeleccion();
     }
 
-    public void actualizarAlojamiento(){
+    public void actualizarAlojamiento() throws Exception {
         if (selectedAlojamiento != null){
             bookYourStayServicio.actualizarAlojamiento(selectedAlojamiento.getNombre(), buildAlojamiento());
           limpiarSeleccion();

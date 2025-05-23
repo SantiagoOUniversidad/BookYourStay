@@ -18,12 +18,7 @@ import java.util.List;
 
 
 public class Hotel extends Alojamiento {
-
-    //Atributos
-    private List<Habitacion> habitaciones;
-
     public Hotel(TipoAlojamiento alojamiento, String nombre, String ciudad, String descripcion, Image imagen, float precioPorNoche, int capacidadMaxima, List<TipoServicio> servicios, float costoExtra, List<Habitacion> habitaciones) {
-        super(alojamiento, nombre, ciudad, descripcion, imagen, precioPorNoche, capacidadMaxima, servicios, costoExtra);
-        this.habitaciones = new ArrayList<>();
+        super(alojamiento, nombre, ciudad, descripcion, imagen, precioPorNoche, capacidadMaxima, servicios, costoExtra, habitaciones);
     }
 }
