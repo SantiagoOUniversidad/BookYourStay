@@ -54,7 +54,7 @@ public class BuscarAlojamientoControlador {
     private Image defaultPlaceholderImage;
 
     @FXML
-    void onBuscar(ActionEvent event) {
+    void onBuscar(ActionEvent event) throws Exception {
         aplicarFiltros();
     }
 
@@ -145,7 +145,7 @@ public class BuscarAlojamientoControlador {
         }
     }
 
-    private void aplicarFiltros() {
+    private void aplicarFiltros() throws Exception {
         String textoBusquedaNombre = txtBusqueda.getText().trim();
         String ciudadBusqueda = txtCiudad.getText().trim();
         String tipoSeleccionadoTxt = cbxTipoAlojamiento.getValue();

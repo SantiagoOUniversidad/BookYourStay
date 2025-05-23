@@ -15,12 +15,14 @@ public class BookYourStayServicio {
     private final ClienteServicios clienteServicio;
     private final AlojamientoServicio alojamientoServicio;
     private final OfertaServicio ofertaServicio;
+    private final ReservaServicios reservaServicios;
 
     public BookYourStayServicio() {
         administradorServicio = new AdministradorServicios();
         clienteServicio = new ClienteServicios();
         alojamientoServicio = new AlojamientoServicio();
         ofertaServicio = new OfertaServicio();
+        reservaServicios = new ReservaServicios();
     }
 
     public Cliente validarInicioCliente(String id, String password) throws Exception {
@@ -53,6 +55,14 @@ public class BookYourStayServicio {
 
     public List<Alojamiento> getAlojamientos(){
         return alojamientoServicio.listarAlojamientos();
+    }
+
+    public float calcularGananciasTotales(Alojamiento alojamiento){
+        return reservaServicios.calcularGananciasTotales(alojamiento);
+    }
+
+    public float calcularOcupacion(Alojamiento alojamiento){
+        return reservaServicios.calcularOcupacion(alojamiento);
     }
 
     public Alojamiento agregarAlojamiento(TipoAlojamiento tipo, String nombre, String ciudad, String descripcion, Image imagen, float precioPorNoche, int capacidadMaxima, List<TipoServicio> servicios, float costoExtra, List<Habitacion> habitaciones) throws Exception {
