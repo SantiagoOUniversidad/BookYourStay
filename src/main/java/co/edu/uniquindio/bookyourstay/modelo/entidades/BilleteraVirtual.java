@@ -15,6 +15,5 @@ public class BilleteraVirtual {
     //Atributos
     private String numero;
     private float saldo;
-    private List<Reserva> listaReservas;
     private Cliente cliente;
 }

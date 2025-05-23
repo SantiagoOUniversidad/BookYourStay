@@ -5,10 +5,10 @@ import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteRespositorio {
+public class ClienteRepositorio {
     private final List<Cliente> clientes;
 
-    public ClienteRespositorio() {
+    public ClienteRepositorio() {
         clientes = new ArrayList<Cliente>();
     }
 

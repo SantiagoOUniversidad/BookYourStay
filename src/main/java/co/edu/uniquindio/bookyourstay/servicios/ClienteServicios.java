@@ -1,16 +1,15 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
-import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.ClienteTemporal;
-import co.edu.uniquindio.bookyourstay.repositorio.ClienteRespositorio;
+import co.edu.uniquindio.bookyourstay.repositorio.ClienteRepositorio;
 
 public class ClienteServicios {
-    private final ClienteRespositorio clienteRespositorio;
+    private final ClienteRepositorio clienteRepositorio;
     private EnviarCodigoVerificacionServicios enviarCodigoVerificacionServicios = new EnviarCodigoVerificacionServicios();
 
     public ClienteServicios() {
-        this.clienteRespositorio = new ClienteRespositorio();
+        this.clienteRepositorio = new ClienteRepositorio();
     }
 
     //CONSTANTES
@@ -41,7 +40,7 @@ public class ClienteServicios {
         try {
             enviarCodigoVerificacionServicios.verificarCodigo(email, codigoIngresado);
             Cliente nuevoCliente = Cliente.builder().cedula(cedula).nombre(nombre).telefono(telefono).email(email).password(password).build();
-            clienteRespositorio.agregarCliente(nuevoCliente);
+            clienteRepositorio.agregarCliente(nuevoCliente);
             ClienteTemporal.clientesTemporales.remove(clienteTemporal);
             return nuevoCliente;
         } catch (Exception e) {
@@ -50,11 +49,10 @@ public class ClienteServicios {
     }
 
     public Cliente buscarCliente(String cedula) throws Exception{
-        Exception clienteNoEncontrado = new Exception("Cliente no encontrado");
         if (cedula == null || cedula.isEmpty()) {
             throw camposVacios;
         }
-        Cliente clienteFiltrado = clienteRespositorio.listarClientes().stream()
+        Cliente clienteFiltrado = clienteRepositorio.listarClientes().stream()
                 .filter(cliente -> cliente.getCedula().equals(cedula))
                 .findFirst()
                 .orElse(null);
@@ -77,7 +75,7 @@ public class ClienteServicios {
         }
         try {
             Cliente clienteEliminar = buscarCliente(cedula);
-            clienteRespositorio.eliminarCliente(clienteEliminar);
+            clienteRepositorio.eliminarCliente(clienteEliminar);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -87,7 +85,7 @@ public class ClienteServicios {
         if(id == null || id.isEmpty() || password == null || password.isEmpty()) {
             throw camposVacios;
         }
-        for (Cliente cliente : clienteRespositorio.listarClientes()) {
+        for (Cliente cliente : clienteRepositorio.listarClientes()) {
             if (cliente.getCedula().equals(id) && cliente.getPassword().equals(password)) {
                 return cliente;
             }
