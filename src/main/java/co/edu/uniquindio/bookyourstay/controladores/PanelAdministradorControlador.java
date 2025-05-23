@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -27,7 +26,8 @@ public class PanelAdministradorControlador {
 
     @FXML
     void gestionarOfertas(ActionEvent event) {
-
+        Parent node = cargarPanel("/co/edu/uniquindio/bookyourstay/GestionarOfertas.fxml");
+        panelPrincipal.getChildren().setAll(node);
     }
 
     @FXML
@@ -36,13 +36,11 @@ public class PanelAdministradorControlador {
     }
 
     @FXML
-    private Button btnVolver;
-
-    @FXML
-    void onVolver(ActionEvent event) throws IOException {
-        ControladorPrincipal.openView("InicioSesionCliente.fxml", "Iniciar Sesion", new Stage());
-        ControladorPrincipal.cerrarVentana((Stage) btnVolver.getScene().getWindow());
+    void cerrarSesionAction(ActionEvent event) throws IOException {
+        ControladorPrincipal.openView("InicioSesionCliente.fxml", "Inicio Sesion", new Stage());
+        ControladorPrincipal.cerrarVentana((Stage) panelPrincipal.getScene().getWindow());
     }
+
 
     // Metodo para actualizar el panel principal
     private Parent cargarPanel(String fxmlFile) {

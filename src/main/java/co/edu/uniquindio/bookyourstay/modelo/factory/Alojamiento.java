@@ -1,5 +1,6 @@
 package co.edu.uniquindio.bookyourstay.modelo.factory;
 
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Habitacion;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoAlojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoServicio;
 import javafx.scene.image.Image;
@@ -25,4 +26,5 @@ public class Alojamiento {
     public int capacidadMax;
     public List<TipoServicio> servicios;
     public float costoExtra;
+    public List<Habitacion> habitaciones;
 }

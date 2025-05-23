@@ -3,6 +3,7 @@ package co.edu.uniquindio.bookyourstay.modelo.entidades;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -15,6 +16,6 @@ public class Oferta {
     //Atributos
     private Alojamiento alojamiento;
     private double descuento;
-    private Date fechaInicio;
-    private Date fechaFinal;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFinal;
 }
