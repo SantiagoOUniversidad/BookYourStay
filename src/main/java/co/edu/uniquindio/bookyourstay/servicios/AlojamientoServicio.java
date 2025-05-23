@@ -2,6 +2,7 @@ package co.edu.uniquindio.bookyourstay.servicios;
 
 import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Habitacion;
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Reserva;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoAlojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoServicio;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
@@ -10,6 +11,8 @@ import co.edu.uniquindio.bookyourstay.repositorio.AlojamientoRepositorio;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class AlojamientoServicio {
@@ -22,6 +25,35 @@ public class AlojamientoServicio {
 
     public List<Alojamiento> listarAlojamientos() {
         return alojamientoRepositorio.listarAlojamientos();
+    }
+
+
+
+    // Buscar Alojamiento por nombre
+    public Alojamiento buscarAlojamiento(String nombre) throws Exception {
+        if (nombre == null || nombre.isEmpty()) {
+            throw new Exception("No puede haber campos vacios");
+        }
+        Alojamiento alojamientoFiltrado = alojamientoRepositorio.listarAlojamientos().stream()
+                .filter(a -> nombre.equals(a.getNombre()))
+                .findFirst()
+                .orElse(null);
+        if (alojamientoFiltrado == null) {
+            throw new Exception("El alojamiento no existe");
+        }
+        return alojamientoFiltrado;
+    }
+
+
+    public List<Alojamiento> buscarAlojamientoPorTipo(TipoAlojamiento tipoAlojamiento) throws Exception {
+        return alojamientoRepositorio.buscarAlojamientoPorTipo(tipoAlojamiento);
+    }
+
+    public List<Alojamiento> buscarAlojamientoPorCiudad(String ciudad){
+        return alojamientoRepositorio.buscarAlojamientoPorCiudad(ciudad);
+    }
+    public List<Alojamiento> buscarAlojamientoPorPrecio(float precioMin, float precioMax){
+        return alojamientoRepositorio.buscarAlojamientoPorPrecio(precioMin, precioMax);
     }
 
     // Crear Alojamiento

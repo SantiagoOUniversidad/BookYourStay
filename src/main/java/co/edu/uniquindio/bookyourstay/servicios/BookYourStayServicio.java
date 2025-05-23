@@ -15,14 +15,12 @@ public class BookYourStayServicio {
     private final ClienteServicios clienteServicio;
     private final AlojamientoServicio alojamientoServicio;
     private final OfertaServicio ofertaServicio;
-    private final AlojamientoRepositorio alojamientoRepositorio;
 
     public BookYourStayServicio() {
         administradorServicio = new AdministradorServicios();
         clienteServicio = new ClienteServicios();
         alojamientoServicio = new AlojamientoServicio();
         ofertaServicio = new OfertaServicio();
-        alojamientoRepositorio = new AlojamientoRepositorio();
     }
 
     public Cliente validarInicioCliente(String id, String password) throws Exception {
@@ -89,11 +87,16 @@ public class BookYourStayServicio {
         ofertaServicio.actualizarOferta(oferta,actualizado);
     }
 
-    public Alojamiento buscarAlojamientoPorNombre(String nombre){ return alojamientoRepositorio.bucarAlojamientoPorNombre(nombre); }
+    public Alojamiento buscarAlojamientoPorNombre(String nombre) throws Exception { return alojamientoServicio.buscarAlojamiento(nombre); }
 
-    public List<Alojamiento> buscarAlojamientoPorTipo(TipoAlojamiento tipoAlojamiento){ return alojamientoRepositorio.buscarAlojamientoPorTipo(tipoAlojamiento); }
+    public List<Alojamiento> buscarAlojamientoPorTipo(TipoAlojamiento tipoAlojamiento) throws Exception { return alojamientoServicio.buscarAlojamientoPorTipo(tipoAlojamiento); }
 
-    public List<Alojamiento> buscarAlojamientoPorCiudad(String ciudad){ return alojamientoRepositorio.buscarAlojamientoPorCiudad(ciudad); }
+    public List<Alojamiento> buscarAlojamientoPorCiudad(String ciudad){ return alojamientoServicio.buscarAlojamientoPorCiudad(ciudad); }
 
-    public List<Alojamiento> buscarAlojamientoPorPrecio(float precioMin, float precioMax){ return alojamientoRepositorio.buscarAlojamientoPorPrecio(precioMin, precioMax); }
+    public List<Alojamiento> buscarAlojamientoPorPrecio(float precioMin, float precioMax){ return alojamientoServicio.buscarAlojamientoPorPrecio(precioMin, precioMax); }
+
+    public void agregarCliente(Cliente cliente){
+        clienteServicio.agregarCliente(cliente);
+    }
 }
+

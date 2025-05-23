@@ -30,6 +30,10 @@ public class ClienteServicios {
         return nuevoClienteTemporal;
     }
 
+    public void agregarCliente(Cliente cliente){
+        clienteRespositorio.agregarCliente(cliente);
+    }
+
     // Crea cliente verificado que si ingresa a la lista de clientes
     public Cliente crearClienteVerificado(ClienteTemporal clienteTemporal, String codigoIngresado) throws Exception {
         String cedula = clienteTemporal.getCedula();
