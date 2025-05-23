@@ -15,7 +15,7 @@ public class PanelAdministradorControlador {
 
     @FXML
     void cambiarContrasena(ActionEvent event) {
-        Parent node = cargarPanel("/co/edu/uniquindio/bookyourstay/GestionarAlojamientos.fxml");
+        Parent node = cargarPanel("/co/edu/uniquindio/bookyourstay/cambiarContrasenaAdministrador.fxml");
         panelPrincipal.getChildren().setAll(node);
     }
 
