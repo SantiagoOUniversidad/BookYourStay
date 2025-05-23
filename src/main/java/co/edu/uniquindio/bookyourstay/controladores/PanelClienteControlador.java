@@ -54,8 +54,9 @@ public class PanelClienteControlador implements Initializable {
     }
 
     @FXML
-    void onReseñaAction(ActionEvent event) {
-
+    void onReseñaAction(ActionEvent event) throws IOException {
+        ControladorPrincipal.openView("Resenas.fxml", "Reseñas", new Stage());
+        ControladorPrincipal.cerrarVentana((Stage) btnMiCuenta.getScene().getWindow());
     }
 
     @FXML
@@ -67,6 +68,7 @@ public class PanelClienteControlador implements Initializable {
     @FXML
     void onVolver(ActionEvent event) throws IOException {
         ControladorPrincipal.openView("InicioSesionCliente.fxml", "Inicio Sesion", new Stage());
+        Sesion.getInstancia().setCliente(null);
         ControladorPrincipal.cerrarVentana((Stage) btnMiCuenta.getScene().getWindow());
     }
 

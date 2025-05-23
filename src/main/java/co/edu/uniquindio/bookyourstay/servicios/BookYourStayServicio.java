@@ -16,6 +16,7 @@ public class BookYourStayServicio {
     private final AlojamientoServicio alojamientoServicio;
     private final OfertaServicio ofertaServicio;
     private final ReservaServicios reservaServicios;
+    private final ResenasServicio resenasServicio;
 
     public BookYourStayServicio() {
         administradorServicio = new AdministradorServicios();
@@ -23,10 +24,19 @@ public class BookYourStayServicio {
         alojamientoServicio = new AlojamientoServicio();
         ofertaServicio = new OfertaServicio();
         reservaServicios = new ReservaServicios();
+        resenasServicio = new ResenasServicio();
     }
 
     public List<Reserva> listarReservasCliente(Cliente cliente){
         return reservaServicios.listarReservasCliente(cliente);
+    }
+
+    public List<Resena> listarResena(){
+        return resenasServicio.listarResenas();
+    }
+
+    public void agregarResena(Resena resena) {
+        resenasServicio.agregarResena(resena);
     }
 
     public void eliminarReserva(Reserva reserva) {
