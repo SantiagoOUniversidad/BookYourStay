@@ -4,7 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 public class PanelAdministradorControlador {
     @FXML
     private StackPane panelPrincipal;
@@ -28,6 +33,15 @@ public class PanelAdministradorControlador {
     @FXML
     void obtenerEstadisticas(ActionEvent event) {
 
+    }
+
+    @FXML
+    private Button btnVolver;
+
+    @FXML
+    void onVolver(ActionEvent event) throws IOException {
+        ControladorPrincipal.openView("InicioSesionCliente.fxml", "Iniciar Sesion", new Stage());
+        ControladorPrincipal.cerrarVentana((Stage) btnVolver.getScene().getWindow());
     }
 
     // Metodo para actualizar el panel principal

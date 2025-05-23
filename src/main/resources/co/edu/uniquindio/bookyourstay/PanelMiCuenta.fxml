@@ -18,7 +18,7 @@
             </VBox.margin>
         </Label>
 
-        <Button onAction="#onEditarDatosAction" prefHeight="45.0" prefWidth="200.0" text="Editar mis datos">
+        <Button fx:id="btnEditarDatos" onAction="#onEditarDatosAction" prefHeight="45.0" prefWidth="200.0" text="Editar mis datos">
             <font>
                 <Font size="16.0" />
             </font>

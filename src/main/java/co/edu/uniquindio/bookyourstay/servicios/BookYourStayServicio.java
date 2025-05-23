@@ -7,6 +7,7 @@ import co.edu.uniquindio.bookyourstay.modelo.entidades.Habitacion;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoAlojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoServicio;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
+import co.edu.uniquindio.bookyourstay.repositorio.AlojamientoRepositorio;
 import javafx.scene.image.Image;
 
 import java.util.List;
@@ -15,11 +16,13 @@ public class BookYourStayServicio {
     private final AdministradorServicios administradorServicio;
     private final ClienteServicios clienteServicio;
     private final AlojamientoServicio alojamientoServicio;
+    private final AlojamientoRepositorio alojamientoRepositorio;
 
     public BookYourStayServicio() {
         administradorServicio = new AdministradorServicios();
         clienteServicio = new ClienteServicios();
         alojamientoServicio = new AlojamientoServicio();
+        alojamientoRepositorio = new AlojamientoRepositorio();
     }
 
     public Cliente validarInicioCliente(String id, String password) throws Exception {
@@ -65,4 +68,12 @@ public class BookYourStayServicio {
     public void actualizarAlojamiento(String nombre, Alojamiento actualizado){
         alojamientoServicio.actualizarAlojamiento(nombre,actualizado);
     }
+
+    public Alojamiento buscarAlojamientoPorNombre(String nombre){ return alojamientoRepositorio.bucarAlojamientoPorNombre(nombre); }
+
+    public List<Alojamiento> buscarAlojamientoPorTipo(TipoAlojamiento tipoAlojamiento){ return alojamientoRepositorio.buscarAlojamientoPorTipo(tipoAlojamiento); }
+
+    public List<Alojamiento> buscarAlojamientoPorCiudad(String ciudad){ return alojamientoRepositorio.buscarAlojamientoPorCiudad(ciudad); }
+
+    public List<Alojamiento> buscarAlojamientoPorPrecio(float precioMin, float precioMax){ return alojamientoRepositorio.buscarAlojamientoPorPrecio(precioMin, precioMax); }
 }
