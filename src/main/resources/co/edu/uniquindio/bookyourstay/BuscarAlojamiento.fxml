@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bookyourstay.controladores.BuscarAlojamientoControlador">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bookyourstay.controladores.BuscarAlojamientoControlador">
     <top>
         <VBox spacing="10.0" BorderPane.alignment="CENTER">
             <children>
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
-                        <TextField fx:id="txtBusqueda" HBox.hgrow="ALWAYS" promptText="Buscar por nombre o descripción..." />
-                        <ComboBox fx:id="cbxTipoAlojamiento" prefWidth="150.0" promptText="Tipo de Alojamiento" />
-                        <TextField fx:id="txtCiudad" promptText="Ciudad" prefWidth="150.0" />
-                        <TextField fx:id="txtPrecioMax" promptText="Precio Máx." prefWidth="100.0" />
+                        <TextField fx:id="txtBusqueda" prefHeight="25.0" prefWidth="123.0" promptText="Buscar por nombre o descripción..." HBox.hgrow="ALWAYS" />
+                        <ComboBox fx:id="cbxTipoAlojamiento" prefHeight="25.0" prefWidth="155.0" promptText="Tipo de Alojamiento" />
+                        <TextField fx:id="txtCiudad" prefHeight="25.0" prefWidth="112.0" promptText="Ciudad" />
+                        <TextField fx:id="txtPrecioMax" prefWidth="100.0" promptText="Precio Máx." />
                         <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#onBuscar" text="Buscar" />
                         <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#onLimpiar" text="Limpiar" />
                         <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#onVolver" text="Volver" />
