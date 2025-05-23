@@ -3,11 +3,15 @@ package co.edu.uniquindio.bookyourstay.servicios;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.ClienteTemporal;
+import co.edu.uniquindio.bookyourstay.repositorio.ClienteRespositorio;
 
 public class ClienteServicios {
-
-    private final BookYourStay bookYourStay = BookYourStay.getInstancia();
+    private final ClienteRespositorio clienteRespositorio;
     private EnviarCodigoVerificacionServicios enviarCodigoVerificacionServicios = new EnviarCodigoVerificacionServicios();
+
+    public ClienteServicios() {
+        this.clienteRespositorio = new ClienteRespositorio();
+    }
 
     //CONSTANTES
     Exception camposVacios = new Exception("Ningún campo puede estar vacío");
@@ -37,7 +41,7 @@ public class ClienteServicios {
         try {
             enviarCodigoVerificacionServicios.verificarCodigo(email, codigoIngresado);
             Cliente nuevoCliente = Cliente.builder().cedula(cedula).nombre(nombre).telefono(telefono).email(email).password(password).build();
-            bookYourStay.clientes.add(nuevoCliente);
+            clienteRespositorio.agregarCliente(nuevoCliente);
             ClienteTemporal.clientesTemporales.remove(clienteTemporal);
             return nuevoCliente;
         } catch (Exception e) {
@@ -50,7 +54,7 @@ public class ClienteServicios {
         if (cedula == null || cedula.isEmpty()) {
             throw camposVacios;
         }
-        Cliente clienteFiltrado = bookYourStay.clientes.stream()
+        Cliente clienteFiltrado = clienteRespositorio.listarClientes().stream()
                 .filter(cliente -> cliente.getCedula().equals(cedula))
                 .findFirst()
                 .orElse(null);
@@ -73,7 +77,7 @@ public class ClienteServicios {
         }
         try {
             Cliente clienteEliminar = buscarCliente(cedula);
-            bookYourStay.clientes.remove(clienteEliminar);
+            clienteRespositorio.eliminarCliente(clienteEliminar);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -83,7 +87,7 @@ public class ClienteServicios {
         if(id == null || id.isEmpty() || password == null || password.isEmpty()) {
             throw camposVacios;
         }
-        for (Cliente cliente : bookYourStay.clientes) {
+        for (Cliente cliente : clienteRespositorio.listarClientes()) {
             if (cliente.getCedula().equals(id) && cliente.getPassword().equals(password)) {
                 return cliente;
             }
