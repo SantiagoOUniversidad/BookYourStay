@@ -2,8 +2,6 @@ package co.edu.uniquindio.bookyourstay.modelo.entidades;
 
 import lombok.*;
 
-import java.util.List;
-
 @Getter
 @Setter
 @ToString
@@ -13,7 +11,7 @@ import java.util.List;
 public class BilleteraVirtual {
 
     //Atributos
-    private String numero;
-    private float saldo;
-    private Cliente cliente;
+    public String numero;
+    public float saldo;
+    public Cliente cliente;
 }

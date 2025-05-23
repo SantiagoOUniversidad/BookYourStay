@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tuproyecto.controller.BilleteraController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bookyourstay.controladores.BilleteraClienteControlador">
     <children>
         <Label text="Gestión de Billetera Virtual">
             <font>
@@ -20,16 +20,16 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label fx:id="numeroBilleteraLabel" text="[NÚMERO AQUÍ]" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2c3e50;" />
+                <Label fx:id="lblNumeroBilletera" text="[NÚMERO AQUÍ]" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2c3e50;" />
                 <Label text="Tu saldo actual es:">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label fx:id="saldoBilleteraLabel" text="COP $ [SALDO AQUÍ]" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #27ae60;" />
+                <Label fx:id="lblSaldoBilletera" text="COP $ [SALDO AQUÍ]" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #27ae60;" />
             </children>
         </VBox>
-        <Button fx:id="recargarButton" mnemonicParsing="false" onAction="#handleRecargarAction" prefHeight="35.0" prefWidth="120.0" text="Recargar Saldo">
+        <Button fx:id="btnRecargar" mnemonicParsing="false" onAction="#onRecargar" prefHeight="35.0" prefWidth="120.0" text="Recargar Saldo">
             <font>
                 <Font size="14.0" />
             </font>
