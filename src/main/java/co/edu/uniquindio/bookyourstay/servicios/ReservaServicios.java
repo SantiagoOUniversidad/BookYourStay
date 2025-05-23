@@ -62,4 +62,8 @@ public class ReservaServicios {
     public void eliminarReserva(Reserva reserva) {
         reservaRepositorio.eliminarReserva(reserva);
     }
+
+    public void agregarReserva(Reserva reserva) {
+        reservaRepositorio.agregarReserva(reserva);
+    }
  }

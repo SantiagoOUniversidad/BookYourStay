@@ -1,11 +1,14 @@
 package co.edu.uniquindio.bookyourstay.controladores;
 
+import co.edu.uniquindio.bookyourstay.modelo.entidades.BilleteraVirtual;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Reserva;
 import co.edu.uniquindio.bookyourstay.modelo.enums.TipoAlojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
 import co.edu.uniquindio.bookyourstay.modelo.vo.Sesion;
 import co.edu.uniquindio.bookyourstay.servicios.BookYourStayServicio;
+import co.edu.uniquindio.bookyourstay.servicios.FacturaServicios;
+import co.edu.uniquindio.bookyourstay.utils.Factura;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +21,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -30,6 +34,7 @@ public class BuscarAlojamientoControlador {
     private final ControladorPrincipal controladorPrincipal = ControladorPrincipal.getInstancia();
     BookYourStayServicio bookYourStayServicio = controladorPrincipal.getBookYourStayServicio();
     private final Cliente cliente = Sesion.getInstancia().getCliente();
+    FacturaServicios factura = new FacturaServicios(null, null, 0, 0);
 
     @FXML
     private TextField txtBusqueda;
@@ -221,12 +226,22 @@ public class BuscarAlojamientoControlador {
 
                     // Configurar la acción del botón para ESTE alojamiento específico
                     reservarButton.setOnAction(event -> {
+                        BilleteraVirtual billetera = cliente.getBilleteraVirtual();
                         LocalDate fechaInicio = fechaInicioPicker.getValue();
                         LocalDate fechaFin = fechaFinPicker.getValue();
-                        int numeroDias = (int) ChronoUnit.DAYS.between(fechaInicio, fechaFin);
+                        int numeroDias = (int) Duration.between(fechaInicio, fechaFin).toDays();
                         int numHuespedes = huespedesSpinner.getValue();
-                        float precioTotal = alojamiento.getPrecioPorNoche() * numeroDias;
-                        Reserva reserva = Reserva.builder().cliente(cliente).alojamiento(alojamiento).cantidadPersonas(numHuespedes).fechaInicio(fechaInicio).fechaFinal(fechaFin).precioTotal(precioTotal).build();
+                        float precioParcial = alojamiento.getPrecioPorNoche() * numeroDias;
+                        float precioTotal = precioParcial + alojamiento.getCostoExtra();
+                        if (cliente.getBilleteraVirtual() == null || billetera.getSaldo() < precioTotal) {
+                            controladorPrincipal.crearAlerta("No tienes saldo suficiente para realizar esta reserva.", Alert.AlertType.ERROR);
+                        } else {
+                            Factura facturaReserva = factura.generarFactura(LocalDate.now(), precioParcial, precioTotal);
+                            factura.enviarFactura(facturaReserva, cliente.getEmail());
+                            Reserva reserva = Reserva.builder().cliente(cliente).alojamiento(alojamiento).cantidadPersonas(numHuespedes).fechaInicio(fechaInicio).fechaFinal(fechaFin).precioTotal(precioTotal).factura(facturaReserva).build();
+                            bookYourStayServicio.agregarReserva(reserva);
+                            controladorPrincipal.crearAlerta("Reserva realizada con éxito.", Alert.AlertType.INFORMATION);
+                        }
                         fechaInicioPicker.setValue(null);
                     });
 

@@ -7,8 +7,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<!-- Necesario para vgrow y hgrow -->
-
 <BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bookyourstay.controladores.PanelClienteControlador"> <!-- ACTUALIZA ESTE CONTROLADOR -->
 
     <top>
@@ -40,7 +38,7 @@
                     <children>
                         <Button maxHeight="Infinity" maxWidth="Infinity" onAction="#onMisReservasAction" prefHeight="433.0" prefWidth="80.0" style="-fx-font-size: 20px; -fx-base: #AED6F1;" text="Mis reservas" HBox.hgrow="ALWAYS" />
                         <Button maxHeight="Infinity" maxWidth="Infinity" onAction="#onReservarAction" style="-fx-font-size: 20px; -fx-base: #A9DFBF;" text="Reservar" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="btnBilletera" maxHeight="Infinity" maxWidth="Infinity" style="-fx-font-size: 20px; -fx-base: #F9E79F;" text="Billetera" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="btnBilletera" onAction="#onBilleteraAction" maxHeight="Infinity" maxWidth="Infinity" style="-fx-font-size: 20px; -fx-base: #F9E79F;" text="Billetera" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="413.0" prefWidth="770.0" spacing="15.0" VBox.vgrow="ALWAYS">

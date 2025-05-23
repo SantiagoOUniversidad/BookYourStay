@@ -1,6 +1,7 @@
 package co.edu.uniquindio.bookyourstay.modelo.entidades;
 
 import co.edu.uniquindio.bookyourstay.modelo.factory.Alojamiento;
+import co.edu.uniquindio.bookyourstay.utils.Factura;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -18,4 +19,5 @@ public class Reserva {
     private LocalDate fechaInicio;
     private LocalDate fechaFinal;
     private float precioTotal;
+    private Factura factura;
 }

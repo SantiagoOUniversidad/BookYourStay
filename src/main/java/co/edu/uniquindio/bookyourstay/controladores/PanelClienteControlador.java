@@ -29,6 +29,9 @@ public class PanelClienteControlador implements Initializable {
     private Label txtBienvenido;
 
     @FXML
+    private Button btnBilletera;
+
+    @FXML
     void onMiCuentaAction(ActionEvent event) {
         try {
             ControladorPrincipal.openView("PanelMiCuenta.fxml", "Mi Cuenta", new Stage());
@@ -53,6 +56,12 @@ public class PanelClienteControlador implements Initializable {
     @FXML
     void onReseñaAction(ActionEvent event) {
 
+    }
+
+    @FXML
+    void onBilleteraAction(ActionEvent event) throws IOException {
+        ControladorPrincipal.openView("BilleteraCliente.fxml", "Billetera", new Stage());
+        ControladorPrincipal.cerrarVentana((Stage) btnBilletera.getScene().getWindow());
     }
 
     @FXML

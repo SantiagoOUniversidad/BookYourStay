@@ -120,5 +120,7 @@ public class BookYourStayServicio {
     public void agregarCliente(Cliente cliente){
         clienteServicio.agregarCliente(cliente);
     }
+
+    public void agregarReserva(Reserva reserva){ reservaServicios.agregarReserva(reserva); }
 }
 

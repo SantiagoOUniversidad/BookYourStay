@@ -3,10 +3,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bookyourstay.controladores.BilleteraClienteControlador">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.bookyourstay.controladores.BilleteraClienteControlador">
     <children>
         <Label text="Gestión de Billetera Virtual">
             <font>
@@ -20,16 +21,18 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label fx:id="lblNumeroBilletera" text="[NÚMERO AQUÍ]" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2c3e50;" />
+                <Label fx:id="lblNumeroBilletera" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2c3e50;" text="[NÚMERO AQUÍ]" />
                 <Label text="Tu saldo actual es:">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label fx:id="lblSaldoBilletera" text="COP $ [SALDO AQUÍ]" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #27ae60;" />
+                <Label fx:id="lblSaldoBilletera" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #27ae60;" text="COP $ [SALDO AQUÍ]" />
             </children>
         </VBox>
+      <TextField fx:id="txtRecargar" promptText="Ingresa el saldo a recargar..." />
         <Button fx:id="btnRecargar" mnemonicParsing="false" onAction="#onRecargar" prefHeight="35.0" prefWidth="120.0" text="Recargar Saldo">
+        <Button fx:id="btnVolver" mnemonicParsing="false" onAction="#onRecargar" prefHeight="35.0" prefWidth="120.0" text="Volver">
             <font>
                 <Font size="14.0" />
             </font>
