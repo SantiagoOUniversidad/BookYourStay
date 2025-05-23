@@ -39,8 +39,9 @@ public class PanelClienteControlador implements Initializable {
     }
 
     @FXML
-    void onMisReservasAction(ActionEvent event) {
-
+    void onMisReservasAction(ActionEvent event) throws IOException {
+        ControladorPrincipal.openView("ListarReservas.fxml", "Mis reservas", new Stage());
+        ControladorPrincipal.cerrarVentana((Stage) btnMiCuenta.getScene().getWindow());
     }
 
     @FXML
