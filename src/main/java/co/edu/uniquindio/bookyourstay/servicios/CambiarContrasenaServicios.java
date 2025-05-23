@@ -1,18 +1,22 @@
 package co.edu.uniquindio.bookyourstay.servicios;
 
+import co.edu.uniquindio.bookyourstay.modelo.entidades.Administrador;
+import co.edu.uniquindio.bookyourstay.modelo.entidades.BookYourStay;
 import co.edu.uniquindio.bookyourstay.modelo.entidades.Cliente;
 import co.edu.uniquindio.bookyourstay.utils.EnvioEmail;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 public class CambiarContrasenaServicios {
 
-    public Map<String, String> clavesGeneradas = new HashMap<>();;
+    public Map<String, String> clavesGeneradas = new HashMap<>();
 
     ClienteServicios clienteServicios = new ClienteServicios();
     EnvioEmail envioEmail = new EnvioEmail();
+    private final BookYourStay bookYourStay = BookYourStay.getInstancia();
 
     public boolean solicitarClave(String cedula) throws Exception {
         try {
@@ -41,6 +45,34 @@ public class CambiarContrasenaServicios {
         Cliente clienteNuevaContrasena = clienteServicios.buscarCliente(cedula);
         clienteNuevaContrasena.setPassword(nuevaContrasena);
         clavesGeneradas.remove(cedula);
+        return true;
+    }
+
+    public boolean solicitarClaveAdmin() throws Exception {
+        try {
+            Administrador administradorRecuperar = bookYourStay.getAdministradores().stream()
+                    .findFirst()
+                    .orElse(null);
+            String emailAdmin = administradorRecuperar.getEmail();
+            String codigoGenerado = generarCodigo();
+            clavesGeneradas.put(emailAdmin, codigoGenerado);
+            envioEmail.enviarCorreo(emailAdmin, "Código de recuperacion | Book Your Stay", "Tu código es: " + codigoGenerado);
+            return true;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public boolean verificarCodigoAdmin(String codigoIngresado, String nuevaContrasena) throws Exception {
+        Administrador administradorRecuperar = bookYourStay.getAdministradores().stream()
+                .findFirst()
+                .orElse(null);
+        String codigoGuardado = clavesGeneradas.get(administradorRecuperar.getEmail());
+        if (codigoGuardado == null || !codigoIngresado.equals(codigoGuardado)) {
+            throw new Exception("Código incorrecto o expirado");
+        }
+        administradorRecuperar.setPassword(nuevaContrasena);
+        clavesGeneradas.remove(administradorRecuperar.getEmail());
         return true;
     }
 

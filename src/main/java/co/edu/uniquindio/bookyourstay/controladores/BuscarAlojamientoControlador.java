@@ -86,8 +86,7 @@ public class BuscarAlojamientoControlador {
             private final VBox textoVBox = new VBox(5);
             private final HBox contentHBox = new HBox(10);
 
-            { // Bloque de inicialización para la celda
-                // Estilos básicos (puedes mejorarlos con CSS)
+            {
                 nombreLabel.setFont(Font.font("System", FontWeight.BOLD, 14));
                 precioLabel.setFont(Font.font("System", FontWeight.BOLD, 13));
                 precioLabel.setStyle("-fx-text-fill: green;");

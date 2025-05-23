@@ -11,10 +11,10 @@ import java.time.LocalDate;
 @Builder
 
 public class Reserva {
-
     //Atributos
     private Cliente cliente;
     private Alojamiento alojamiento;
+    private int cantidadPersonas;
     private LocalDate fechaInicio;
     private LocalDate fechaFinal;
     private float precioTotal;
